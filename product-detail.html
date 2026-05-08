@@ -1,0 +1,598 @@
+<html lang="sq"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fustan Elegante — Fashion Montenegro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F6F1;
+  --ink: #0D0D0D;
+  --teal: #00B4CC;
+  --teal-light: #E0F7FA;
+  --teal-mid: #007A8C;
+  --cream: #EDE9E0;
+  --mid: #888580;
+  --white: #FFFFFF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: none; }
+
+#cursor { position: fixed; top:0; left:0; width:12px; height:12px; background:var(--teal); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: width 0.25s, height 0.25s; mix-blend-mode:multiply; }
+#cursor-ring { position: fixed; top:0; left:0; width:40px; height:40px; border:1px solid var(--teal); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:transform 0.18s ease; opacity:0.5; }
+body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:28px; height:28px; background:var(--teal-mid); }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  display: flex; align-items:center; justify-content:space-between;
+  padding: 0 3rem; height: 68px;
+  background: rgba(248,246,241,0.96); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+}
+.nav-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+.nav-logo { font-family:'Playfair Display',serif; font-size:20px; font-weight:900; color:var(--ink); letter-spacing:-0.5px; }
+.nav-logo .country { color:var(--teal); font-style:italic; }
+.nav-back {
+  display: inline-flex; align-items:center; gap:8px;
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  font-weight:500; color:var(--mid); text-decoration:none;
+  transition:color 0.2s;
+}
+.nav-back:hover { color:var(--teal); }
+.nav-back svg { width:16px; height:16px; }
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb {
+  padding: 100px 3rem 0;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--mid);
+}
+.breadcrumb a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--teal); }
+.breadcrumb span { color: var(--teal); }
+
+/* ─── PRODUCT DETAIL ─── */
+.product-detail {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 0; min-height: 90vh;
+  padding: 40px 3rem 80px;
+}
+
+/* ─── GALLERY ─── */
+.gallery-side { position: sticky; top: 80px; align-self: start; }
+.gallery-main {
+  position: relative; overflow: hidden;
+  background: var(--cream);
+  aspect-ratio: 3/4;
+  margin-bottom: 12px;
+}
+.gallery-main img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s ease;
+}
+.gallery-main img:hover { transform: scale(1.04); }
+.gallery-main-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--teal); color: var(--ink);
+  font-size: 7px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 700; padding: 5px 12px;
+}
+.gallery-zoom-hint {
+  position: absolute; bottom: 16px; right: 16px;
+  background: rgba(13,13,13,0.6);
+  color: var(--white); font-size: 9px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 6px 12px; opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-main:hover .gallery-zoom-hint { opacity: 1; }
+
+/* Thumbnails */
+.gallery-thumbs {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+}
+.gallery-thumb {
+  aspect-ratio: 1/1; overflow: hidden;
+  background: var(--cream); cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.gallery-thumb.active { border-color: var(--teal); }
+.gallery-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.3s;
+}
+.gallery-thumb:hover img { transform: scale(1.08); }
+
+/* ─── INFO SIDE ─── */
+.info-side {
+  padding: 0 0 0 4rem;
+  display: flex; flex-direction: column; gap: 1.8rem;
+}
+.product-cat-tag {
+  font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--teal); font-weight: 500;
+}
+.product-detail-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1;
+}
+.product-detail-price {
+  font-size: 36px; font-weight: 700;
+  color: var(--ink); letter-spacing: -1px;
+}
+.product-detail-price em { color: var(--teal); font-style: normal; font-size: 20px; }
+.price-with-shipping {
+  font-size: 11px; color: var(--mid);
+  margin-top: 4px; letter-spacing: 0.5px;
+}
+.price-with-shipping strong { color: var(--ink); }
+
+.divider { border: none; border-top: 1px solid var(--cream); }
+
+/* Size selection */
+.size-section {}
+.size-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.size-label span { color: var(--ink); font-weight: 600; font-size: 12px; }
+.size-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+.size-option {
+  min-width: 52px; padding: 10px 16px;
+  border: 1.5px solid var(--cream);
+  background: var(--white); font-size: 13px;
+  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); transition: all 0.2s;
+  text-align: center;
+}
+.size-option:hover { border-color: var(--ink); }
+.size-option.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.size-option.unavailable { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+/* Add to cart */
+.detail-add-btn {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 18px; width: 100%;
+  background: var(--teal); color: var(--ink);
+  border: none; font-size: 11px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s;
+}
+.detail-add-btn:hover { background: var(--ink); color: var(--white); }
+.detail-add-btn svg { width: 18px; height: 18px; }
+
+.detail-back-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px; width: 100%;
+  background: transparent; color: var(--mid);
+  border: 1.5px solid var(--cream);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  text-decoration: none; transition: all 0.2s;
+}
+.detail-back-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+/* Cash badge */
+.cash-badge {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--cream); padding: 12px 16px;
+  font-size: 12px; font-weight: 500; color: var(--ink);
+}
+.cash-badge svg { width: 18px; height: 18px; color: var(--teal-mid); flex-shrink: 0; }
+
+/* Product info accordion */
+.info-accordion { border-top: 1px solid var(--cream); }
+.accordion-item { border-bottom: 1px solid var(--cream); }
+.accordion-trigger {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; width: 100%;
+  background: none; border: none; cursor: pointer;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 600; color: var(--ink); font-family: 'DM Sans', sans-serif;
+  text-align: left;
+}
+.accordion-trigger svg { width: 16px; height: 16px; color: var(--teal); transition: transform 0.3s; }
+.accordion-trigger.open svg { transform: rotate(45deg); }
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.accordion-body.open { max-height: 200px; }
+.accordion-body p {
+  font-size: 13px; line-height: 1.85;
+  color: #666; padding-bottom: 14px;
+  font-weight: 300;
+}
+
+/* ─── LIGHTBOX ─── */
+.lightbox-overlay {
+  position: fixed; inset: 0;
+  background: rgba(13,13,13,0.92);
+  z-index: 6000; display: none;
+  align-items: center; justify-content: center;
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw; max-height: 90vh;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute; top: 2rem; right: 2rem;
+  background: none; border: none; color: var(--white);
+  font-size: 32px; cursor: pointer; line-height: 1;
+}
+.lightbox-close:hover { color: var(--teal); }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--ink); color: var(--white);
+  padding: 12px 24px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; z-index: 5000; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex; align-items: center; gap: 10px;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast svg { width: 15px; height: 15px; color: var(--teal); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--ink); padding: 2.5rem 3rem; }
+.footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--white); }
+.footer-brand em { color: var(--teal); font-style: italic; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  .product-detail { grid-template-columns: 1fr; padding: 20px 1.5rem 60px; }
+  .gallery-side { position: static; }
+  .info-side { padding: 2rem 0 0; }
+  nav { padding: 0 1.5rem; }
+  .breadcrumb { padding: 90px 1.5rem 0; }
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+}
+@media (max-width: 540px) {
+  .gallery-thumbs { grid-template-columns: repeat(5, 1fr); gap: 5px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor" style="left: 1271px; top: 244px;"></div>
+<div id="cursor-ring" style="left: 1271px; top: 244px;"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-logo">Fashion <span class="country">Montenegro</span></span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+    Kthehu te Shop-i
+  </a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Kryefaqja</a>
+  <span>›</span>
+  <a href="index.html#shop" id="bc-cat">Femra</a>
+  <span>›</span>
+  <span id="bc-name">Fustan Elegante</span>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="product-detail">
+  <!-- GALLERY -->
+  <div class="gallery-side">
+    <div class="gallery-main" id="galleryMain">
+      <span class="gallery-main-badge" id="catBadge">Femra</span>
+      <img id="mainImg" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante">
+      <span class="gallery-zoom-hint">Kliko për të zmadhuar</span>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbs"><div class="gallery-thumb active"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante"></div><div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante"></div><div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante"></div><div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante"></div><div class="gallery-thumb"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante"></div></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-side">
+    <p class="product-cat-tag" id="catTag">KOLEKSIONI FEMRA · 2025</p>
+    <h1 class="product-detail-name" id="productName">Fustan Elegante</h1>
+    <div>
+      <div class="product-detail-price">
+        <span id="productPrice">32</span><em>€</em>
+      </div>
+      <p class="price-with-shipping">+ transport <strong>4€</strong> — gjithsej: <strong id="totalWithShipping">36€</strong></p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SIZE -->
+    <div class="size-section">
+      <div class="size-label">
+        Zgjidhni Masën <span id="selectedSizeLabel">—</span>
+      </div>
+      <div class="size-grid" id="sizeGrid">
+    <button class="size-option" onclick="selectDetailSize('XS', this)">XS</button>
+  
+    <button class="size-option" onclick="selectDetailSize('S', this)">S</button>
+  
+    <button class="size-option" onclick="selectDetailSize('M', this)">M</button>
+  
+    <button class="size-option" onclick="selectDetailSize('L', this)">L</button>
+  </div>
+    </div>
+
+    <!-- CASH BADGE -->
+    <div class="cash-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+      Pagesa me <strong style="margin:0 4px;">CASH</strong> pas dorëzimit · Nuk kërkohet kartë
+    </div>
+
+    <!-- BUTTONS -->
+    <button class="detail-add-btn" id="addToCartDetail" onclick="addDetailToCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      Shto në Shportë
+    </button>
+    <a href="index.html#shop" class="detail-back-btn">
+      ← Vazhdo Blerjen
+    </a>
+
+    <hr class="divider">
+
+    <!-- ACCORDION -->
+    <div class="info-accordion">
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          Përshkrimi i Produktit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        </button>
+        <div class="accordion-body">
+          <p id="accordionDesc">Fustan elegant i koleksionit 2025. Perfect për mbrëmje dhe raste speciale. Material i butë dhe i cilësisë së lartë.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          Udhëzime Kujdesi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        </button>
+        <div class="accordion-body">
+          <p>Lahet me dorë ose makinë në 30°C. Mos e tharoni në rreze dielli direkte. Hekuroseni nga ana e brendshme. Ruhet në vend të thatë.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          Informacioni i Dërgimit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        </button>
+        <div class="accordion-body">
+          <p>Dërgesa brenda 2-4 ditëve pune. Kosto transporti: <strong>4€</strong> për çdo porosi. Pagesa bëhet me cash direkt te kurieri pas marrjes së porosisë.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-brand">Fashion <em>Montenegro</em></div>
+    <p class="footer-copy">© 2025 Fashion Montenegro · Zogu i I, Shkodër</p>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+  <span id="toastMsg">U shtua në shportë!</span>
+</div>
+
+<script>
+// ─── PRODUCT DATA (same as index.html) ───
+const products = {
+  femra: [
+    { id:'f1', name:'Fustan Elegante', price:32, img:'images/1.jpg', sizes:['XS','S','M','L'], cat:'femra', desc:'Fustan elegant i koleksionit 2025. Perfect për mbrëmje dhe raste speciale. Material i butë dhe i cilësisë së lartë.' },
+    { id:'f2', name:'Bluzë Verore', price:18, img:'images/2.jpg', sizes:['S','M','L','XL'], cat:'femra', desc:'Bluzë e lehtë dhe verore, ideale për ditët e ngrohta. Ngjyra të freskëta dhe dizajn modern.' },
+    { id:'f3', name:'Pantallona Slim', price:28, img:'images/3.jpg', sizes:['XS','S','M','L','XL'], cat:'femra', desc:'Pantallona slim fit me prerje elegante. Kombinohen lehtë me çdo bluzë ose xhaketë.' },
+    { id:'f4', name:'Xhaketë Klasike', price:45, img:'images/4.jpg', sizes:['S','M','L'], cat:'femra', desc:'Xhaketë klasike e stilit të lartë. Materiale premium dhe qepje e kujdesshme për duken tënd të shkëlqyer.' },
+    { id:'f5', name:'Set Freskues', price:38, img:'images/5.jpg', sizes:['XS','S','M'], cat:'femra', desc:'Set i plotë verës 2025. Dy copë të koordinuara me ngjyra të harmonizuara.' },
+  ],
+  meshkuj: [
+    { id:'m1', name:'Këmishë Oxford', price:29, img:'images/6.jpg', sizes:['M','L','XL','XXL'], cat:'meshkuj', desc:'Këmishë Oxford klasike, e përshtatshme si për zyrë ashtu edhe për raste joformale.' },
+    { id:'m2', name:'Pantallona Chino', price:34, img:'images/7.jpg', sizes:['S','M','L','XL'], cat:'meshkuj', desc:'Pantallona chino me prerje moderne dhe material të cilësisë premium. Komfortabël gjatë gjithë ditës.' },
+    { id:'m3', name:'Xhaketë Casual', price:52, img:'images/8.jpg', sizes:['M','L','XL','XXL'], cat:'meshkuj', desc:'Xhaketë casual me stil urban. Ideale për çdo rast të përditshëm me duken e freskët.' },
+    { id:'m4', name:'Polo Verore', price:22, img:'images/9.jpg', sizes:['S','M','L','XL','XXL'], cat:'meshkuj', desc:'Polo klasike verore nga materiale natyrore. E lehtë, e freskët dhe elegante.' },
+    { id:'m5', name:'Set Sporti', price:41, img:'images/10.jpg', sizes:['M','L','XL'], cat:'meshkuj', desc:'Set sportiv i stilit modern. Material teknik dhe dizajn atletik për komfort maksimal.' },
+  ]
+};
+
+// ─── STATE ───
+let currentProduct = null;
+let selectedSize = null;
+let currentImgIdx = 0;
+
+// For this static detail page, we use the same image for all thumbs
+// (user will replace with real photos)
+// We show the same product image + placeholder for thumbs
+function getThumbSrc(product, idx) {
+  // All thumbs use same image for now — user replaces with real ones
+  return product.img;
+}
+
+// ─── INIT FROM URL ───
+function init() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const cat = params.get('cat') || 'femra';
+
+  const allProducts = [...products.femra, ...products.meshkuj];
+  currentProduct = allProducts.find(p => p.id === id);
+
+  if (!currentProduct && allProducts.length > 0) {
+    currentProduct = allProducts[0];
+  }
+
+  if (!currentProduct) return;
+
+  // Breadcrumb
+  document.getElementById('bc-cat').textContent = cat === 'femra' ? 'Femra' : 'Meshkuj';
+  document.getElementById('bc-name').textContent = currentProduct.name;
+  document.title = currentProduct.name + ' — Fashion Montenegro';
+
+  // Category badge & tag
+  const isFemra = currentProduct.cat === 'femra';
+  document.getElementById('catBadge').textContent = isFemra ? 'Femra' : 'Meshkuj';
+  document.getElementById('catTag').textContent = `KOLEKSIONI ${isFemra ? 'FEMRA' : 'MESHKUJ'} · 2025`;
+
+  // Name & price
+  document.getElementById('productName').textContent = currentProduct.name;
+  document.getElementById('productPrice').textContent = currentProduct.price;
+  document.getElementById('totalWithShipping').textContent = (currentProduct.price + 4) + '€';
+
+  // Description
+  document.getElementById('accordionDesc').textContent = currentProduct.desc;
+
+  // Main image
+  const mainImg = document.getElementById('mainImg');
+  mainImg.src = currentProduct.img;
+  mainImg.alt = currentProduct.name;
+  mainImg.onerror = function() {
+    this.src = 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&auto=format&fit=crop&q=80';
+  };
+
+  // Click main image → lightbox
+  document.getElementById('galleryMain').addEventListener('click', () => openLightbox(mainImg.src));
+
+  // Thumbs — show 5 thumbs all pointing to same image (user adds more later)
+  const thumbsEl = document.getElementById('galleryThumbs');
+  thumbsEl.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const thumb = document.createElement('div');
+    thumb.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+    const tImg = document.createElement('img');
+    tImg.src = currentProduct.img;
+    tImg.alt = currentProduct.name;
+    tImg.onerror = function() {
+      this.src = 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&auto=format&fit=crop&q=80';
+    };
+    thumb.appendChild(tImg);
+    const idx = i;
+    thumb.addEventListener('click', () => {
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      mainImg.src = tImg.src;
+    });
+    thumbsEl.appendChild(thumb);
+  }
+
+  // Sizes
+  const sizeGrid = document.getElementById('sizeGrid');
+  sizeGrid.innerHTML = currentProduct.sizes.map(s => `
+    <button class="size-option" onclick="selectDetailSize('${s}', this)">${s}</button>
+  `).join('');
+}
+
+function selectDetailSize(size, btn) {
+  selectedSize = size;
+  document.querySelectorAll('.size-option').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('selectedSizeLabel').textContent = size;
+}
+
+function addDetailToCart() {
+  if (!selectedSize) {
+    showToast('⚠ Zgjidhni madhësinë fillimisht!');
+    return;
+  }
+  // Store in sessionStorage to pass back to index
+  const cartItem = {
+    id: currentProduct.id,
+    name: currentProduct.name,
+    price: currentProduct.price,
+    img: currentProduct.img,
+    size: selectedSize,
+    cat: currentProduct.cat
+  };
+  // Get existing cart
+  let cart = [];
+  try { cart = JSON.parse(sessionStorage.getItem('fm_cart') || '[]'); } catch(e) {}
+  const exists = cart.find(i => i.id === cartItem.id && i.size === cartItem.size);
+  if (!exists) cart.push(cartItem);
+  sessionStorage.setItem('fm_cart', JSON.stringify(cart));
+
+  showToast(`${currentProduct.name} (${selectedSize}) u shtua! ✓`);
+
+  // Animate button
+  const btn = document.getElementById('addToCartDetail');
+  btn.textContent = '✓ U shtua në shportë!';
+  btn.style.background = 'var(--ink)';
+  btn.style.color = 'var(--white)';
+  setTimeout(() => {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Shto në Shportë`;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2500);
+}
+
+// ─── ACCORDION ───
+function toggleAccordion(trigger) {
+  const body = trigger.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.accordion-trigger').forEach(t => t.classList.remove('open'));
+  if (!isOpen) {
+    body.classList.add('open');
+    trigger.classList.add('open');
+  }
+}
+
+// ─── LIGHTBOX ───
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── CURSOR ───
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function moveCursor() {
+  rx += (mx-rx)*0.14; ry += (my-ry)*0.14;
+  if(cur){ cur.style.left=mx+'px'; cur.style.top=my+'px'; }
+  if(ring){ ring.style.left=rx+'px'; ring.style.top=ry+'px'; }
+  requestAnimationFrame(moveCursor);
+})();
+
+init();
+</script>
+
+
+</body></html>
