@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="sq">
-<head>
+<html lang="sq"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O&E Shop — Shkodër</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+<title>Fashion Montenegro — Shkodër</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=DM+Sans:wght@300;400;500&amp;family=Space+Grotesk:wght@300;700&amp;display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #F8F6F1;
@@ -67,13 +65,13 @@ nav.scrolled {
   display: flex; align-items: center; gap: 12px;
   text-decoration: none;
 }
-.nav-oe {
+.nav-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 900;
-  color: var(--ink); letter-spacing: -1px;
+  font-size: 22px; font-weight: 900;
+  color: var(--ink); letter-spacing: -0.5px;
   line-height: 1;
 }
-.nav-oe .amp { color: var(--teal); font-style: italic; }
+.nav-logo .country { color: var(--teal); font-style: italic; }
 .nav-shop-label {
   font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
   color: var(--mid); font-family: 'DM Sans', sans-serif;
@@ -81,6 +79,7 @@ nav.scrolled {
   padding-left: 12px; margin-left: 4px;
   line-height: 1.3;
 }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
 .nav-links {
   display: flex; align-items: center; gap: 2.5rem;
   list-style: none;
@@ -95,18 +94,33 @@ nav.scrolled {
   bottom: 0; left: 0; width: 0; height: 1.5px;
   background: var(--teal); transition: width 0.3s;
 }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a:hover::after { width: 100%; }
 .nav-links a:hover { color: var(--teal-mid); }
-.nav-cta {
-  background: var(--ink) !important; color: var(--white) !important;
-  padding: 9px 22px !important; font-size: 10px !important;
-  letter-spacing: 2px !important;
+
+/* Cart icon in nav */
+.cart-nav-btn {
+  position: relative; background: none; border: none;
+  cursor: pointer; color: var(--ink);
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; font-family: 'DM Sans', sans-serif;
+  padding: 8px 0;
 }
-.nav-cta::after { display: none !important; }
-.nav-cta:hover { background: var(--teal-mid) !important; color: var(--white) !important; }
+.cart-nav-btn svg { width: 20px; height: 20px; }
+.cart-count {
+  position: absolute; top: 0; right: -8px;
+  background: var(--teal); color: var(--ink);
+  width: 17px; height: 17px; border-radius: 50%;
+  font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0.5);
+}
+.cart-count.has-items { opacity: 1; transform: scale(1); }
+
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
-  cursor: pointer; z-index: 1002;
+  cursor: pointer; z-index: 1002; background: none; border: none;
 }
 .hamburger span {
   display: block; width: 24px; height: 1.5px;
@@ -148,42 +162,44 @@ nav.scrolled {
   opacity: 0.6;
 }
 #oe-canvas { width: 100%; height: 100%; display: block; }
-.hero-left-content {
-  position: relative; z-index: 2;
-}
+.hero-left-content { position: relative; z-index: 2; }
 .hero-eyebrow {
   font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
   color: var(--teal); font-weight: 500; margin-bottom: 1rem;
 }
 .hero-big {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(52px, 7vw, 100px);
+  font-size: clamp(44px, 6vw, 88px);
   font-weight: 900; color: var(--white);
-  line-height: 0.9; letter-spacing: -2px;
+  line-height: 0.95; letter-spacing: -2px;
   margin-bottom: 1.5rem;
 }
 .hero-big .italic { font-style: italic; color: var(--teal); }
 .hero-desc {
   font-size: 13px; color: rgba(255,255,255,0.5);
-  max-width: 280px; line-height: 1.9;
-  font-weight: 300; margin-bottom: 2rem;
+  max-width: 300px; line-height: 1.9;
+  font-weight: 300; margin-bottom: 2.5rem;
 }
-.hero-rating {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 2.5rem;
+
+/* Category split buttons */
+.hero-cats {
+  display: flex; gap: 12px; flex-wrap: wrap;
 }
-.stars { color: var(--teal); font-size: 14px; letter-spacing: 2px; }
-.rating-text { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
-.hero-btn {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--teal); color: var(--ink);
-  padding: 14px 28px; text-decoration: none;
+.hero-cat-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px; text-decoration: none;
   font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; transition: all 0.3s; width: fit-content;
+  font-weight: 700; transition: all 0.3s; cursor: pointer;
+  border: none; font-family: 'DM Sans', sans-serif;
 }
-.hero-btn svg { width: 16px; height: 16px; transition: transform 0.3s; }
-.hero-btn:hover { background: var(--white); }
-.hero-btn:hover svg { transform: translateX(4px); }
+.hero-cat-btn.primary { background: var(--teal); color: var(--ink); }
+.hero-cat-btn.primary:hover { background: var(--white); }
+.hero-cat-btn.secondary {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.hero-cat-btn.secondary:hover { border-color: var(--teal); color: var(--teal); }
+.hero-cat-btn svg { width: 15px; height: 15px; }
 
 .hero-right {
   position: relative; overflow: hidden;
@@ -208,10 +224,7 @@ nav.scrolled {
   font-family: 'Playfair Display', serif;
   font-size: 36px; font-weight: 900; line-height: 1; color: var(--ink);
 }
-.hero-badge-label {
-  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mid); margin-top: 4px;
-}
+.hero-badge-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); margin-top: 4px; }
 .hero-scroll {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -250,159 +263,394 @@ nav.scrolled {
   to { transform: translateX(-50%); }
 }
 
-/* ─── ABOUT SPLIT ─── */
-#about {
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 80vh;
+/* ─── CATEGORY TABS ─── */
+#shop { padding: 80px 3rem; background: var(--bg); }
+.shop-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1.5rem;
 }
-.about-visual {
+.shop-title-group {}
+.shop-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+.shop-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 4.5vw, 62px);
+  font-weight: 900; line-height: 1; letter-spacing: -1.5px;
+}
+.shop-main-title em { font-style: italic; color: var(--teal); }
+
+/* Category tab switcher */
+.cat-tabs {
+  display: flex; gap: 4px;
+  background: var(--cream); padding: 4px;
+}
+.cat-tab {
+  padding: 10px 24px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer; border: none;
+  background: transparent; color: var(--mid);
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s;
+}
+.cat-tab.active { background: var(--ink); color: var(--white); }
+.cat-tab:not(.active):hover { color: var(--ink); }
+
+/* ─── PRODUCTS GRID ─── */
+.products-section { display: none; }
+.products-section.active { display: block; }
+
+/* Size filter */
+.size-filter {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.size-filter-label {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid); font-weight: 500;
+}
+.size-btn {
+  padding: 6px 14px; border: 1px solid var(--cream);
+  background: var(--white); font-size: 11px;
+  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); transition: all 0.2s;
+}
+.size-btn:hover, .size-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ─── PRODUCT CARD ─── */
+.product-card {
+  background: var(--white);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+.product-img-wrap {
   position: relative; overflow: hidden;
+  aspect-ratio: 3/4;
   background: var(--cream);
 }
-.about-visual img {
+.product-img-wrap img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  transition: transform 0.8s;
+  transition: transform 0.6s;
 }
-.about-visual:hover img { transform: scale(1.04); }
-.about-visual-tag {
-  position: absolute; bottom: 2rem; left: 2rem;
+.product-card:hover .product-img-wrap img { transform: scale(1.06); }
+
+/* Category badge */
+.product-cat-badge {
+  position: absolute; top: 12px; left: 12px;
   background: var(--teal); color: var(--ink);
-  padding: 8px 18px; font-size: 9px;
-  letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
+  font-size: 7px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 700; padding: 4px 10px;
 }
-.about-content {
-  padding: 6rem 4rem;
-  display: flex; flex-direction: column; justify-content: center;
-  background: var(--white);
-}
-.about-tag {
-  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 1.2rem;
-}
-.about-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 900; line-height: 1.05;
-  letter-spacing: -1px; margin-bottom: 1.5rem;
-}
-.about-title em { font-style: italic; color: var(--teal); }
-.about-text {
-  font-size: 14px; line-height: 1.95;
-  color: #555; font-weight: 300; max-width: 420px;
-  margin-bottom: 2rem;
-}
-.about-numbers {
-  display: flex; gap: 2.5rem; margin-bottom: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--cream);
-}
-.about-num {}
-.about-num-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px; font-weight: 900;
-  color: var(--ink); line-height: 1;
-}
-.about-num-val span { color: var(--teal); }
-.about-num-label {
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); margin-top: 4px;
-}
-.about-cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  text-decoration: none; color: var(--ink);
-  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; border-bottom: 1.5px solid var(--ink);
-  padding-bottom: 4px; transition: all 0.3s; width: fit-content;
-}
-.about-cta:hover { color: var(--teal); border-color: var(--teal); }
 
-/* ─── COLLECTIONS ─── */
-#collections { padding: 100px 3rem; background: var(--bg); }
-.coll-top {
-  display: flex; align-items: flex-end;
-  justify-content: space-between; margin-bottom: 3.5rem;
-  flex-wrap: wrap; gap: 1rem;
-}
-.coll-title-group {}
-.coll-eyebrow {
-  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 0.8rem;
-}
-.coll-main-title {
+.product-info { padding: 1rem 1.2rem 1.4rem; }
+.product-name {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(38px, 5vw, 68px);
-  font-weight: 900; line-height: 1;
-  letter-spacing: -1.5px;
+  font-size: 17px; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; line-height: 1.2;
 }
-.coll-main-title em { font-style: italic; color: var(--teal); }
-.coll-see-all {
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); text-decoration: none; font-weight: 500;
-  display: flex; align-items: center; gap: 8px;
-  transition: color 0.3s;
+.product-price-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
 }
-.coll-see-all:hover { color: var(--teal); }
-.coll-see-all svg { width: 20px; height: 20px; }
+.product-price {
+  font-size: 20px; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.5px;
+}
+.product-price span { color: var(--teal); font-size: 14px; }
 
-/* Masonry-ish grid */
-.coll-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 12px;
+/* Quick size select on card */
+.product-sizes-row {
+  display: flex; gap: 5px; flex-wrap: wrap;
+  margin-bottom: 12px;
 }
-.coll-item {
-  position: relative; overflow: hidden;
-  cursor: pointer;
+.ps-btn {
+  padding: 4px 9px; border: 1px solid var(--cream);
+  background: transparent; font-size: 10px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  color: var(--mid); transition: all 0.2s;
 }
-.coll-item:first-child {
-  grid-row: 1 / 3;
-  min-height: 600px;
+.ps-btn:hover, .ps-btn.selected { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+.add-to-cart-btn {
+  width: 100%; padding: 11px;
+  background: var(--ink); color: var(--white);
+  border: none; font-size: 9px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.coll-item:not(:first-child) { min-height: 285px; }
-.coll-item img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.7s ease;
+.add-to-cart-btn:hover { background: var(--teal); color: var(--ink); }
+.add-to-cart-btn svg { width: 14px; height: 14px; }
+.view-detail-btn {
+  display: block; text-align: center;
+  padding: 7px;
+  background: transparent; color: var(--mid);
+  border: 1px solid var(--cream);
+  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  text-decoration: none; margin-top: 6px;
+  transition: all 0.2s;
 }
-.coll-item:hover img { transform: scale(1.06); }
-.coll-item-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(13,13,13,0.75) 0%, transparent 50%);
+.view-detail-btn:hover { color: var(--teal); border-color: var(--teal); }
+
+/* ─── CART DRAWER ─── */
+.cart-overlay {
+  position: fixed; inset: 0;
+  background: rgba(13,13,13,0.5);
+  z-index: 2000; opacity: 0;
+  pointer-events: none; transition: opacity 0.3s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+
+.cart-drawer {
+  position: fixed; top: 0; right: -100%;
+  width: 420px; max-width: 100vw; height: 100vh;
+  background: var(--white); z-index: 2001;
   display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 1.8rem;
-  transition: background 0.4s;
+  transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
 }
-.coll-item:hover .coll-item-overlay {
-  background: linear-gradient(to top, rgba(13,13,13,0.88) 0%, rgba(0,180,204,0.1) 100%);
-}
-.coll-item-cat {
-  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 5px;
-}
-.coll-item-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 700;
-  color: var(--white); line-height: 1.2;
-}
-.coll-item:first-child .coll-item-title { font-size: 32px; }
-.coll-item-arrow {
-  opacity: 0; transform: translateX(-8px);
-  transition: all 0.3s;
-  margin-top: 8px;
-  font-size: 10px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--teal);
-}
-.coll-item:hover .coll-item-arrow { opacity: 1; transform: translateX(0); }
+.cart-drawer.open { right: 0; }
 
-/* ─── FEATURES ─── */
+.cart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 1.8rem;
+  border-bottom: 1px solid var(--cream);
+}
+.cart-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+}
+.cart-close-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink); padding: 4px;
+}
+.cart-close-btn svg { width: 22px; height: 22px; }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 1.2rem 1.8rem; }
+.cart-empty {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 60%;
+  color: var(--mid); text-align: center; gap: 1rem;
+}
+.cart-empty svg { width: 48px; height: 48px; opacity: 0.3; }
+.cart-empty p { font-size: 13px; letter-spacing: 1px; }
+
+.cart-item {
+  display: flex; gap: 1rem; padding: 1rem 0;
+  border-bottom: 1px solid var(--cream);
+}
+.cart-item-img {
+  width: 70px; height: 90px;
+  object-fit: cover; background: var(--cream);
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; }
+.cart-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--ink); margin-bottom: 4px;
+}
+.cart-item-size {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 8px;
+}
+.cart-item-price {
+  font-size: 16px; font-weight: 700; color: var(--ink);
+}
+.cart-item-remove {
+  background: none; border: none; cursor: pointer;
+  color: var(--mid); font-size: 18px; align-self: flex-start;
+  padding: 0;
+}
+.cart-item-remove:hover { color: #cc0000; }
+
+.cart-footer { padding: 1.5rem 1.8rem; border-top: 1px solid var(--cream); }
+.cart-shipping-note {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--teal-light);
+  padding: 10px 14px; margin-bottom: 1rem;
+  font-size: 12px; color: var(--teal-mid); font-weight: 500;
+}
+.cart-shipping-note svg { width: 15px; height: 15px; flex-shrink: 0; }
+.cart-summary { margin-bottom: 1.2rem; }
+.cart-summary-row {
+  display: flex; justify-content: space-between;
+  font-size: 13px; color: #666; padding: 5px 0;
+}
+.cart-summary-row.total {
+  font-size: 17px; font-weight: 700;
+  color: var(--ink); border-top: 1.5px solid var(--ink);
+  margin-top: 6px; padding-top: 10px;
+}
+.cart-checkout-btn {
+  width: 100%; padding: 16px;
+  background: var(--teal); color: var(--ink);
+  border: none; font-size: 10px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.cart-checkout-btn:hover { background: var(--teal-mid); color: var(--white); }
+.cart-checkout-btn svg { width: 16px; height: 16px; }
+
+/* ─── CHECKOUT MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(13,13,13,0.6);
+  z-index: 3000; display: none;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  width: 100%; max-width: 540px;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+}
+.modal-header {
+  padding: 2rem 2rem 1.2rem;
+  border-bottom: 1px solid var(--cream);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 900; letter-spacing: -0.5px;
+}
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink); font-size: 22px; line-height: 1;
+}
+.modal-body { padding: 1.8rem 2rem; }
+
+/* Order summary in modal */
+.order-summary-box {
+  background: var(--bg);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.8rem;
+}
+.order-summary-title {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid); margin-bottom: 1rem;
+}
+.order-item-row {
+  display: flex; justify-content: space-between;
+  font-size: 13px; color: var(--ink);
+  padding: 4px 0;
+}
+.order-item-row.size-row { color: var(--mid); font-size: 11px; }
+.order-divider { border: none; border-top: 1px solid var(--cream); margin: 8px 0; }
+.order-subtotal, .order-shipping, .order-total {
+  display: flex; justify-content: space-between;
+  font-size: 13px; padding: 4px 0;
+}
+.order-shipping { color: var(--mid); }
+.order-total { font-weight: 700; font-size: 16px; color: var(--ink); }
+
+/* Payment method banner */
+.payment-method-banner {
+  background: var(--cream); padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 1.8rem;
+  font-size: 12px; font-weight: 500; color: var(--ink);
+}
+.payment-method-banner svg { width: 20px; height: 20px; color: var(--teal-mid); flex-shrink: 0; }
+
+/* Form */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-row.single { grid-template-columns: 1fr; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mid); font-weight: 500;
+}
+.form-label .optional { color: var(--teal); }
+.form-input {
+  padding: 11px 14px;
+  border: 1.5px solid var(--cream);
+  background: var(--white);
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--teal); }
+.form-input::placeholder { color: #ccc; }
+
+.place-order-btn {
+  width: 100%; padding: 17px;
+  background: var(--ink); color: var(--white);
+  border: none; font-size: 11px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 1.5rem;
+}
+.place-order-btn:hover { background: var(--teal); color: var(--ink); }
+.place-order-btn svg { width: 16px; height: 16px; }
+
+/* ─── SUCCESS MODAL ─── */
+.success-overlay {
+  position: fixed; inset: 0;
+  background: rgba(13,13,13,0.7);
+  z-index: 4000; display: none;
+  align-items: center; justify-content: center;
+}
+.success-overlay.open { display: flex; }
+.success-box {
+  background: var(--white);
+  padding: 3.5rem;
+  max-width: 440px; width: 90%;
+  text-align: center;
+}
+.success-icon {
+  width: 64px; height: 64px;
+  background: var(--teal-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--teal-mid);
+}
+.success-icon svg { width: 30px; height: 30px; }
+.success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900;
+  letter-spacing: -0.5px; margin-bottom: 0.8rem;
+}
+.success-msg {
+  font-size: 13px; color: var(--mid);
+  line-height: 1.8; margin-bottom: 2rem;
+}
+.success-close-btn {
+  background: var(--ink); color: var(--white);
+  border: none; padding: 13px 32px;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: background 0.2s;
+}
+.success-close-btn:hover { background: var(--teal); color: var(--ink); }
+
+/* ─── ABOUT / FEATURES / CONTACT (from original) ─── */
 #features { padding: 90px 3rem; background: var(--ink); }
 .features-inner { max-width: 1200px; margin: 0 auto; }
 .features-top { margin-bottom: 3.5rem; }
-.features-eyebrow {
-  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 0.8rem;
-}
+.features-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; }
 .features-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(32px, 4vw, 56px);
@@ -410,23 +658,17 @@ nav.scrolled {
   letter-spacing: -1px; line-height: 1.05;
 }
 .features-title em { font-style: italic; color: var(--teal); }
-.features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: rgba(255,255,255,0.06);
-}
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); }
 .feature-card {
-  background: var(--ink);
-  padding: 2.5rem 2rem;
-  transition: background 0.3s;
-  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--ink); padding: 2.5rem 2rem;
+  transition: background 0.3s; border: 1px solid rgba(255,255,255,0.05);
 }
 .feature-card:hover { background: #161616; }
 .feature-num {
   font-family: 'Playfair Display', serif;
   font-size: 72px; font-weight: 900;
-  color: rgba(255,255,255,0.05);
-  line-height: 1; margin-bottom: 1rem;
-  transition: color 0.3s;
+  color: rgba(255,255,255,0.05); line-height: 1;
+  margin-bottom: 1rem; transition: color 0.3s;
 }
 .feature-card:hover .feature-num { color: rgba(0,180,204,0.12); }
 .feature-icon {
@@ -436,145 +678,76 @@ nav.scrolled {
   color: var(--teal); margin-bottom: 1.2rem;
 }
 .feature-icon svg { width: 20px; height: 20px; }
-.feature-h {
-  font-size: 13px; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--white); margin-bottom: 0.8rem;
-}
-.feature-p {
-  font-size: 13px; line-height: 1.85;
-  color: rgba(255,255,255,0.4); font-weight: 300;
-}
+.feature-h { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); margin-bottom: 0.8rem; }
+.feature-p { font-size: 13px; line-height: 1.85; color: rgba(255,255,255,0.4); font-weight: 300; }
 
-/* ─── CONTACT ─── */
 #contact { padding: 100px 3rem; background: var(--bg); }
 .contact-inner { max-width: 1100px; margin: 0 auto; }
 .contact-top { text-align: center; margin-bottom: 4rem; }
-.contact-eyebrow {
-  font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 0.8rem;
-}
+.contact-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; }
 .contact-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(38px, 5vw, 68px);
   font-weight: 900; letter-spacing: -1.5px; line-height: 1;
 }
 .contact-title em { font-style: italic; color: var(--teal); }
-.contact-grid {
-  display: grid; grid-template-columns: 1fr 1.2fr;
-  gap: 4rem; align-items: start;
-}
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
 .contact-details { display: flex; flex-direction: column; gap: 2rem; }
-.contact-item {
-  display: flex; gap: 1.2rem; align-items: flex-start;
-}
-.contact-item-dot {
-  width: 2px; height: 2px;
-  background: var(--teal); margin-top: 8px; min-width: 2px;
-}
-.contact-item-label {
-  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 4px;
-}
-.contact-item-val {
-  font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.5;
-}
+.contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+.contact-item-dot { width: 2px; height: 2px; background: var(--teal); margin-top: 8px; min-width: 2px; }
+.contact-item-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+.contact-item-val { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.5; }
 .contact-hours { display: flex; flex-direction: column; gap: 4px; }
-.contact-hours-row {
-  display: flex; justify-content: space-between;
-  font-size: 13px; color: #666; font-weight: 300;
-  padding-bottom: 4px; border-bottom: 1px solid var(--cream);
-}
+.contact-hours-row { display: flex; justify-content: space-between; font-size: 13px; color: #666; font-weight: 300; padding-bottom: 4px; border-bottom: 1px solid var(--cream); }
 .contact-hours-row span:last-child { font-weight: 500; color: var(--ink); }
-.contact-map {
-  background: var(--cream);
-  height: 340px; position: relative; overflow: hidden;
-}
-.contact-map iframe {
-  width: 100%; height: 100%; border: none;
-  filter: grayscale(0.3) contrast(1.05);
-}
-.contact-map-badge {
-  position: absolute; bottom: 1.2rem; left: 1.2rem;
-  background: var(--white);
-  padding: 0.8rem 1.2rem;
-  display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
+.contact-map { background: var(--cream); height: 340px; position: relative; overflow: hidden; }
+.contact-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.05); }
+.contact-map-badge { position: absolute; bottom: 1.2rem; left: 1.2rem; background: var(--white); padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 .contact-map-badge svg { color: var(--teal); width: 18px; height: 18px; }
-.contact-map-badge-text {}
-.contact-map-badge-name {
-  font-weight: 700; font-size: 13px; color: var(--ink);
-}
-.contact-map-badge-addr {
-  font-size: 10px; color: var(--mid);
-}
+.contact-map-badge-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+.contact-map-badge-addr { font-size: 10px; color: var(--mid); }
 .contact-phone-cta {
   margin-top: 2rem;
   display: inline-flex; align-items: center; gap: 14px;
-  text-decoration: none;
-  background: var(--teal); color: var(--ink);
-  padding: 15px 28px;
-  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 700; transition: background 0.3s;
-  width: 100%;
+  text-decoration: none; background: var(--teal); color: var(--ink);
+  padding: 15px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 700; transition: background 0.3s; width: 100%;
 }
 .contact-phone-cta svg { width: 18px; height: 18px; }
 .contact-phone-cta:hover { background: var(--teal-mid); color: var(--white); }
 
 /* ─── FOOTER ─── */
-footer {
-  background: var(--ink);
-  padding: 3.5rem 3rem 2.5rem;
-}
-.footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 2rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding-bottom: 2rem; margin-bottom: 2rem;
-}
-.footer-brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 38px; font-weight: 900;
-  color: var(--white); letter-spacing: -1px;
-}
-.footer-brand .amp { color: var(--teal); font-style: italic; }
-.footer-links {
-  display: flex; gap: 2rem; list-style: none; flex-wrap: wrap;
-}
-.footer-links a {
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,0.4); text-decoration: none;
-  transition: color 0.2s;
-}
+footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2rem; margin-bottom: 2rem; }
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -1px; }
+.footer-brand em { color: var(--teal); font-style: italic; }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--teal); }
-.footer-bottom {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy {
-  font-size: 11px; color: rgba(255,255,255,0.2);
-  letter-spacing: 0.5px;
-}
-.footer-rating {
-  display: flex; align-items: center; gap: 8px;
-}
+.footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.5px; }
+.footer-rating { display: flex; align-items: center; gap: 8px; }
 .footer-stars { color: #FFB800; font-size: 12px; letter-spacing: 2px; }
 .footer-rating-txt { font-size: 11px; color: rgba(255,255,255,0.3); }
 
 /* ─── REVEAL ─── */
-.reveal {
-  opacity: 0; transform: translateY(22px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
-}
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left {
-  opacity: 0; transform: translateX(-28px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+.reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--ink); color: var(--white);
+  padding: 12px 24px; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; font-weight: 500;
+  z-index: 5000; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex; align-items: center; gap: 10px;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast svg { width: 15px; height: 15px; color: var(--teal); }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 960px) {
@@ -583,54 +756,54 @@ footer {
   #hero { grid-template-columns: 1fr; }
   .hero-right { display: none; }
   .hero-left { padding-bottom: 5rem; min-height: 100vh; justify-content: flex-end; }
-  #about { grid-template-columns: 1fr; }
-  .about-visual { min-height: 350px; }
-  .about-content { padding: 3.5rem 2rem; }
-  .coll-grid { grid-template-columns: 1fr 1fr; }
-  .coll-item:first-child { grid-column: 1 / 3; grid-row: auto; min-height: 380px; }
   .features-grid { grid-template-columns: 1fr 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   nav { padding: 0 1.5rem; }
-  #collections, #features, #contact { padding: 70px 1.5rem; }
+  #shop, #features, #contact { padding: 60px 1.5rem; }
   body { cursor: auto; }
   #cursor, #cursor-ring { display: none; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
 }
 @media (max-width: 540px) {
-  .coll-grid { grid-template-columns: 1fr; }
-  .coll-item:first-child { grid-column: 1; min-height: 340px; }
   .features-grid { grid-template-columns: 1fr; }
-  .about-numbers { gap: 1.5rem; }
-  .hero-big { font-size: 54px; }
+  .hero-big { font-size: 48px; }
+  .form-row { grid-template-columns: 1fr; }
+  .cart-drawer { width: 100vw; }
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div id="cursor" style="left: 1019px; top: 516px;"></div>
+<div id="cursor-ring" style="left: 1019px; top: 516px;"></div>
 
 <!-- NAVBAR -->
-<nav id="navbar">
+<nav id="navbar" class="">
   <a href="#" class="nav-brand">
-    <span class="nav-oe">O<span class="amp">&amp;</span>E</span>
-    <span class="nav-shop-label">SHOP<br>SHKODËR</span>
+    <span class="nav-logo">Fashion <span class="country">Montenegro</span></span>
+    <span class="nav-shop-label">BOUTIQUE<br>SHKODËR</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#about">Rreth Nesh</a></li>
-    <li><a href="#collections">Koleksionet</a></li>
-    <li><a href="#features">Pse Ne</a></li>
-    <li><a href="#contact" class="nav-cta">Kontakt</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#features">Pse Ne</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+    <button class="cart-nav-btn" id="cartNavBtn" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 01-8 0"></path>
+      </svg>
+      Shporta
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#about" class="ml">Rreth Nesh</a>
-  <a href="#collections" class="ml">Koleksionet</a>
+  <a href="#shop" class="ml">Shop</a>
   <a href="#features" class="ml">Pse Ne</a>
   <a href="#contact" class="ml">Kontakt</a>
 </div>
@@ -638,140 +811,355 @@ footer {
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <div class="hero-canvas-wrap">
-      <canvas id="oe-canvas"></canvas>
-    </div>
+    <div class="hero-canvas-wrap"><canvas id="oe-canvas" width="430" height="932" style="width: 430px; height: 932px;"></canvas></div>
     <div class="hero-left-content">
-      <p class="hero-eyebrow">Shkodër · Albania · Zogu i I</p>
+      <p class="hero-eyebrow">Shkodër · Albania · Fashion Montenegro</p>
       <h1 class="hero-big">
-        O<span class="italic">&amp;</span>E<br>SHOP
+        Fashion<br><span class="italic">Monte</span><br>negro
       </h1>
-      <p class="hero-desc">Moda bashkëkohore për femra dhe meshkuj. Zgjedhje unike, stil i pakrahasueshëm — direkt në zemrën e Shkodrës.</p>
-      <div class="hero-rating">
-        <span class="stars">★★★★★</span>
-        <span class="rating-text">5.0 · Vlerësimet e klientëve</span>
+      <p class="hero-desc">Moda bashkëkohore për femra dhe meshkuj. Stile ekzkluzive — direkt në zemrën e Shkodrës.</p>
+      <div class="hero-cats">
+        <button class="hero-cat-btn primary" onclick="switchTab('femra'); document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="8" r="4"></circle><path d="M12 12v8M9 19h6"></path></svg>
+          Koleksioni Femra
+        </button>
+        <button class="hero-cat-btn secondary" onclick="switchTab('meshkuj'); document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="10" cy="14" r="4"></circle><path d="M21 3l-6 6M15 3h6v6"></path></svg>
+          Koleksioni Meshkuj
+        </button>
       </div>
-      <a href="#collections" class="hero-btn">
-        Shiko Koleksionet
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&auto=format&fit=crop&q=85" alt="O&E Shop interior fashion">
+    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&amp;auto=format&amp;fit=crop&amp;q=85" alt="Fashion Montenegro">
     <div class="hero-badge">
       <div class="hero-badge-stars">★★★★★</div>
       <div class="hero-badge-score">5.0</div>
       <div class="hero-badge-label">Google Rating</div>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Zbrit</span>
-    <div class="scroll-arrow"></div>
-  </div>
+  <div class="hero-scroll"><span>Zbrit</span><div class="scroll-arrow"></div></div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span>O&amp;E SHOP</span><span class="dot">·</span>
-    <span>FASHION BOUTIQUE</span><span class="dot">·</span>
-    <span>SHKODËR ALBANIA</span><span class="dot">·</span>
+    <span>FASHION MONTENEGRO</span><span class="dot">·</span>
+    <span>BOUTIQUE SHKODËR</span><span class="dot">·</span>
     <span>KOLEKSION 2025</span><span class="dot">·</span>
     <span>FEMRA &amp; MESHKUJ</span><span class="dot">·</span>
     <span>⭐ 5.0 STARS</span><span class="dot">·</span>
-    <span>O&amp;E SHOP</span><span class="dot">·</span>
-    <span>FASHION BOUTIQUE</span><span class="dot">·</span>
-    <span>SHKODËR ALBANIA</span><span class="dot">·</span>
+    <span>TRANSPORT +4€</span><span class="dot">·</span>
+    <span>FASHION MONTENEGRO</span><span class="dot">·</span>
+    <span>BOUTIQUE SHKODËR</span><span class="dot">·</span>
     <span>KOLEKSION 2025</span><span class="dot">·</span>
     <span>FEMRA &amp; MESHKUJ</span><span class="dot">·</span>
     <span>⭐ 5.0 STARS</span><span class="dot">·</span>
+    <span>TRANSPORT +4€</span><span class="dot">·</span>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-visual reveal-left">
-    <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&auto=format&fit=crop&q=85" alt="O&E Shop boutique">
-    <span class="about-visual-tag">Dyqani Ynë</span>
-  </div>
-  <div class="about-content reveal">
-    <p class="about-tag">Historia e O&amp;E</p>
-    <h2 class="about-title">MES STILIT<br><em>dhe Elegancës</em></h2>
-    <p class="about-text">O&amp;E Shop është njëri nga dyqanet e modës më të çmuara në Shkodër. Ndodhur në Zogu i I, ne ofrojmë koleksione ekzkluzive për femra dhe meshkuj, duke kombinuar brendet ndërkombëtare me stilin lokal.</p>
-    <p class="about-text">Me një ambient modern dhe ndriçim të veçantë, O&amp;E Shop krijon një eksperiencë blerjeje të papërsëritshme. Çdo detaj i brendshëm është projektuar për të bërë klientin të ndihet special.</p>
-    <div class="about-numbers">
-      <div class="about-num">
-        <div class="about-num-val">5<span>.0</span></div>
-        <div class="about-num-label">Google Rating</div>
-      </div>
-      <div class="about-num">
-        <div class="about-num-val">400<span>+</span></div>
-        <div class="about-num-label">Produkte</div>
-      </div>
-      <div class="about-num">
-        <div class="about-num-val">2<span>in1</span></div>
-        <div class="about-num-label">Femra & Meshkuj</div>
-      </div>
+<!-- SHOP -->
+<section id="shop">
+  <div class="shop-header reveal visible">
+    <div class="shop-title-group">
+      <p class="shop-eyebrow">Koleksionet 2025</p>
+      <h2 class="shop-main-title">ZGJIDH<br><em>Stilin Tënd</em></h2>
     </div>
-    <a href="#contact" class="about-cta">
-      Vizito Dyqanin
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+    <div class="cat-tabs">
+      <button class="cat-tab active" id="tab-femra" onclick="switchTab('femra')">
+        ♀ Femra
+      </button>
+      <button class="cat-tab" id="tab-meshkuj" onclick="switchTab('meshkuj')">
+        ♂ Meshkuj
+      </button>
+    </div>
   </div>
-</section>
 
-<!-- COLLECTIONS -->
-<section id="collections">
-  <div class="coll-top reveal">
-    <div class="coll-title-group">
-      <p class="coll-eyebrow">Koleksionet 2025</p>
-      <h2 class="coll-main-title">ZGJIDH<br><em>Stilin Tënd</em></h2>
+  <!-- FEMRA -->
+  <div class="products-section active" id="section-femra">
+    <div class="size-filter">
+      <span class="size-filter-label">Filtroni sipas masës:</span>
+      <button class="size-btn active" onclick="filterSize(this,'femra','all')">Të Gjitha</button>
+      <button class="size-btn" onclick="filterSize(this,'femra','XS')">XS</button>
+      <button class="size-btn" onclick="filterSize(this,'femra','S')">S</button>
+      <button class="size-btn" onclick="filterSize(this,'femra','M')">M</button>
+      <button class="size-btn" onclick="filterSize(this,'femra','L')">L</button>
+      <button class="size-btn" onclick="filterSize(this,'femra','XL')">XL</button>
     </div>
-    <a href="#contact" class="coll-see-all">
-      Të gjitha
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+    <div class="products-grid" id="grid-femra">
+    <div class="product-card reveal visible">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Femra</span>
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Fustan Elegante</div>
+        <div class="product-price-row">
+          <div class="product-price">32<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('f1','XS',this)">XS</button>
+    
+      <button class="ps-btn " onclick="selectSize('f1','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('f1','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('f1','L',this)">L</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('f1','femra')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=f1&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div>
+    <div class="product-card reveal visible">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Femra</span>
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Bluzë Verore" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Bluzë Verore</div>
+        <div class="product-price-row">
+          <div class="product-price">18<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('f2','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('f2','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('f2','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('f2','XL',this)">XL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('f2','femra')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=f2&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div>
+    <div class="product-card reveal visible">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Femra</span>
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Pantallona Slim" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Pantallona Slim</div>
+        <div class="product-price-row">
+          <div class="product-price">28<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('f3','XS',this)">XS</button>
+    
+      <button class="ps-btn " onclick="selectSize('f3','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('f3','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('f3','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('f3','XL',this)">XL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('f3','femra')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=f3&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div>
+    <div class="product-card reveal visible">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Femra</span>
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Xhaketë Klasike" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Xhaketë Klasike</div>
+        <div class="product-price-row">
+          <div class="product-price">45<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('f4','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('f4','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('f4','L',this)">L</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('f4','femra')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=f4&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div>
+    <div class="product-card reveal visible">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Femra</span>
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Set Freskues" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Set Freskues</div>
+        <div class="product-price-row">
+          <div class="product-price">38<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('f5','XS',this)">XS</button>
+    
+      <button class="ps-btn " onclick="selectSize('f5','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('f5','M',this)">M</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('f5','femra')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=f5&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div></div>
   </div>
-  <div class="coll-grid">
-    <div class="coll-item reveal">
-      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&auto=format&fit=crop&q=85" alt="Women Fashion" loading="lazy">
-      <div class="coll-item-overlay">
-        <span class="coll-item-cat">Koleksioni Femra</span>
-        <h3 class="coll-item-title">Elegancë<br>Bashkëkohore</h3>
-        <span class="coll-item-arrow">Shiko Tani →</span>
+
+  <!-- MESHKUJ -->
+  <div class="products-section" id="section-meshkuj">
+    <div class="size-filter">
+      <span class="size-filter-label">Filtroni sipas masës:</span>
+      <button class="size-btn active" onclick="filterSize(this,'meshkuj','all')">Të Gjitha</button>
+      <button class="size-btn" onclick="filterSize(this,'meshkuj','S')">S</button>
+      <button class="size-btn" onclick="filterSize(this,'meshkuj','M')">M</button>
+      <button class="size-btn" onclick="filterSize(this,'meshkuj','L')">L</button>
+      <button class="size-btn" onclick="filterSize(this,'meshkuj','XL')">XL</button>
+      <button class="size-btn" onclick="filterSize(this,'meshkuj','XXL')">XXL</button>
+    </div>
+    <div class="products-grid" id="grid-meshkuj">
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Meshkuj</span>
+        <img src="images/6.jpg" alt="Këmishë Oxford" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Këmishë Oxford</div>
+        <div class="product-price-row">
+          <div class="product-price">29<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('m1','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('m1','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('m1','XL',this)">XL</button>
+    
+      <button class="ps-btn " onclick="selectSize('m1','XXL',this)">XXL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('m1','meshkuj')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=m1&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
       </div>
     </div>
-    <div class="coll-item reveal">
-      <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600&auto=format&fit=crop&q=85" alt="Men Fashion" loading="lazy">
-      <div class="coll-item-overlay">
-        <span class="coll-item-cat">Koleksioni Meshkuj</span>
-        <h3 class="coll-item-title">Stil Modern</h3>
-        <span class="coll-item-arrow">Shiko Tani →</span>
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Meshkuj</span>
+        <img src="images/7.jpg" alt="Pantallona Chino" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Pantallona Chino</div>
+        <div class="product-price-row">
+          <div class="product-price">34<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('m2','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('m2','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('m2','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('m2','XL',this)">XL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('m2','meshkuj')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=m2&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
       </div>
     </div>
-    <div class="coll-item reveal">
-      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&auto=format&fit=crop&q=85" alt="Accessories" loading="lazy">
-      <div class="coll-item-overlay">
-        <span class="coll-item-cat">Aksesore</span>
-        <h3 class="coll-item-title">Detajet Bëjnë<br>Ndryshimin</h3>
-        <span class="coll-item-arrow">Shiko Tani →</span>
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Meshkuj</span>
+        <img src="images/8.jpg" alt="Xhaketë Casual" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Xhaketë Casual</div>
+        <div class="product-price-row">
+          <div class="product-price">52<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('m3','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('m3','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('m3','XL',this)">XL</button>
+    
+      <button class="ps-btn " onclick="selectSize('m3','XXL',this)">XXL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('m3','meshkuj')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=m3&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
       </div>
     </div>
-    <div class="coll-item reveal" style="grid-column: 2 / 4;">
-      <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&auto=format&fit=crop&q=85" alt="New Season" loading="lazy" style="object-position: center 30%;">
-      <div class="coll-item-overlay">
-        <span class="coll-item-cat">Sezon i Ri</span>
-        <h3 class="coll-item-title">Koleksioni Pranverë / Verë 2025</h3>
-        <span class="coll-item-arrow">Zbulo Tani →</span>
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Meshkuj</span>
+        <img src="images/9.jpg" alt="Polo Verore" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Polo Verore</div>
+        <div class="product-price-row">
+          <div class="product-price">22<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('m4','S',this)">S</button>
+    
+      <button class="ps-btn " onclick="selectSize('m4','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('m4','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('m4','XL',this)">XL</button>
+    
+      <button class="ps-btn " onclick="selectSize('m4','XXL',this)">XXL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('m4','meshkuj')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=m4&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
       </div>
     </div>
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">Meshkuj</span>
+        <img src="images/10.jpg" alt="Set Sporti" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">Set Sporti</div>
+        <div class="product-price-row">
+          <div class="product-price">41<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">
+      <button class="ps-btn " onclick="selectSize('m5','M',this)">M</button>
+    
+      <button class="ps-btn " onclick="selectSize('m5','L',this)">L</button>
+    
+      <button class="ps-btn " onclick="selectSize('m5','XL',this)">XL</button>
+    </div>
+        <button class="add-to-cart-btn" onclick="addToCart('m5','meshkuj')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=m5&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div></div>
   </div>
 </section>
 
@@ -779,39 +1167,27 @@ footer {
 <section id="features">
   <div class="features-inner">
     <div class="features-top reveal">
-      <p class="features-eyebrow">Pse O&amp;E Shop</p>
+      <p class="features-eyebrow">Pse Fashion Montenegro</p>
       <h2 class="features-title">ÇFARË NA BËN<br><em>Të Veçantë</em></h2>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-num">01</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg></div>
         <h3 class="feature-h">5.0 Stars</h3>
-        <p class="feature-p">Vlerësim i përsosur nga klientët tanë në Google. Kënaqësia juaj është prioriteti ynë absolut.</p>
+        <p class="feature-p">Vlerësim i përsosur nga klientët tanë. Kënaqësia juaj është prioriteti ynë absolut.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-num">02</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
-          </svg>
-        </div>
-        <h3 class="feature-h">Ambient Modern</h3>
-        <p class="feature-p">Dyqan i dizenjuar me kujdes me ndriçim profesional dhe ekspozitë elegante të produkteve tona.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></div>
+        <h3 class="feature-h">Dërgesa Shpejt</h3>
+        <p class="feature-p">Transport i shpejtë dhe i sigurt në të gjithë Shqipërinë. Vetëm +4€ për çdo porosi.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-num">03</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </div>
-        <h3 class="feature-h">Shërbim Personal</h3>
-        <p class="feature-p">Stafi ynë i dedikuar ju ndihmon të gjeni veshjen e përsosur për çdo rast dhe sezon.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+        <h3 class="feature-h">Cilësi Premium</h3>
+        <p class="feature-p">Produkte cilësore nga koleksionet më të mira. Stile moderne për çdo rast.</p>
       </div>
     </div>
   </div>
@@ -822,7 +1198,7 @@ footer {
   <div class="contact-inner">
     <div class="contact-top reveal">
       <p class="contact-eyebrow">Na Vizito</p>
-      <h2 class="contact-title">GJEJ<br><em>O&amp;E Shop</em></h2>
+      <h2 class="contact-title">GJEJ<br><em>Fashion Montenegro</em></h2>
     </div>
     <div class="contact-grid">
       <div class="contact-details reveal">
@@ -852,26 +1228,17 @@ footer {
           </div>
         </div>
         <a href="tel:0672944191" class="contact-phone-cta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3 1.26h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3 1.26h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"></path></svg>
           Telefono Tani — 067 294 4191
         </a>
       </div>
       <div class="contact-map reveal">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.4!2d19.512!3d42.068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e017c3f44b20d%3A0x71a43496047c87c0!2sZogu+i+I%2C+Shkod%C3%ABr!5e0!3m2!1ssq!2sal!4v1"
-          allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="O&E Shop Location">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.4!2d19.512!3d42.068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e017c3f44b20d%3A0x71a43496047c87c0!2sZogu+i+I%2C+Shkod%C3%ABr!5e0!3m2!1ssq!2sal!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fashion Montenegro Location">
         </iframe>
         <div class="contact-map-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <div class="contact-map-badge-text">
-            <div class="contact-map-badge-name">O&amp;E Shop</div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div>
+            <div class="contact-map-badge-name">Fashion Montenegro</div>
             <div class="contact-map-badge-addr">Zogu i I, Shkodër 4001</div>
           </div>
         </div>
@@ -883,16 +1250,15 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">O<span class="amp">&amp;</span>E</div>
+    <div class="footer-brand">Fashion <em>Montenegro</em></div>
     <ul class="footer-links">
-      <li><a href="#about">Rreth Nesh</a></li>
-      <li><a href="#collections">Koleksionet</a></li>
+      <li><a href="#shop">Shop</a></li>
       <li><a href="#features">Pse Ne</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 O&amp;E Shop · Zogu i I, Shkodër · All Rights Reserved</p>
+    <p class="footer-copy">© 2025 Fashion Montenegro · Zogu i I, Shkodër · All Rights Reserved</p>
     <div class="footer-rating">
       <span class="footer-stars">★★★★★</span>
       <span class="footer-rating-txt">5.0 / 5.0 në Google</span>
@@ -900,38 +1266,348 @@ footer {
   </div>
 </footer>
 
-<!-- SCRIPTS -->
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <span class="cart-title">Shporta</span>
+    <button class="cart-close-btn" onclick="closeCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <p>Shporta juaj është bosh</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-shipping-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+      Transport: +4€ — pagesa me cash pas dorëzimit
+    </div>
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Nëntotali</span><span id="subtotalVal">0€</span></div>
+      <div class="cart-summary-row"><span>Transport</span><span>+4€</span></div>
+      <div class="cart-summary-row total"><span>TOTAL</span><span id="totalVal">0€</span></div>
+    </div>
+    <button class="cart-checkout-btn" onclick="openCheckout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      Vazhdo me Porosinë
+    </button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">Përfundo Porosinë</span>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Order summary -->
+      <div class="order-summary-box">
+        <p class="order-summary-title">Përmbledhja e Porosisë</p>
+        <div id="modalOrderItems"></div>
+        <hr class="order-divider">
+        <div class="order-subtotal"><span>Nëntotali</span><span id="modalSubtotal">0€</span></div>
+        <div class="order-shipping"><span>Transport</span><span>+4€</span></div>
+        <div class="order-total"><span>TOTAL</span><span id="modalTotal">0€</span></div>
+      </div>
+
+      <!-- Payment method -->
+      <div class="payment-method-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        Pagesa vetëm me <strong style="margin-left:4px;">CASH</strong> — pas dorëzimit
+      </div>
+
+      <!-- Form -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Emri *</label>
+          <input class="form-input" type="text" id="f-name" placeholder="Emri juaj">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mbiemri *</label>
+          <input class="form-input" type="text" id="f-surname" placeholder="Mbiemri juaj">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-group">
+          <label class="form-label">Nr. Telefoni *</label>
+          <input class="form-input" type="tel" id="f-phone" placeholder="06X XXX XXXX">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-group">
+          <label class="form-label">Adresa e Dërgimit *</label>
+          <input class="form-input" type="text" id="f-address" placeholder="Rruga, Qyteti, Kodi Postar">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-group">
+          <label class="form-label">Email <span class="optional">(opsionale)</span></label>
+          <input class="form-input" type="email" id="f-email" placeholder="email@juaj.com">
+        </div>
+      </div>
+
+      <button class="place-order-btn" onclick="placeOrder()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        Konfirmo Porosinë
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    </div>
+    <h2 class="success-title">Porosia u Pranua! 🎉</h2>
+    <p class="success-msg" id="successMsg">Faleminderit! Do t'ju kontaktojmë së shpejti për të konfirmuar dërgimin. Pagesa bëhet me cash pas marrjes.</p>
+    <button class="success-close-btn" onclick="closeSuccess()">Vazhdo Blerjen</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+  <span id="toastMsg">Produkti u shtua në shportë!</span>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ─── CUSTOM CURSOR ───
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function moveCursor() {
-  rx += (mx - rx) * 0.14;
-  ry += (my - ry) * 0.14;
-  if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
-  if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
-  requestAnimationFrame(moveCursor);
-})();
+// ─── DATA ───
+// Femra sizes available per product
+const FEMRA_SIZES = ['XS','S','M','L','XL'];
+const MESHKUJ_SIZES = ['S','M','L','XL','XXL'];
 
-// ─── THREE.JS CANVAS HERO ───
+const products = {
+  femra: [
+    { id:'f1', name:'Fustan Elegante', price:32, img:'images/1.jpg', sizes:['XS','S','M','L'] },
+    { id:'f2', name:'Bluzë Verore', price:18, img:'images/2.jpg', sizes:['S','M','L','XL'] },
+    { id:'f3', name:'Pantallona Slim', price:28, img:'images/3.jpg', sizes:['XS','S','M','L','XL'] },
+    { id:'f4', name:'Xhaketë Klasike', price:45, img:'images/4.jpg', sizes:['S','M','L'] },
+    { id:'f5', name:'Set Freskues', price:38, img:'images/5.jpg', sizes:['XS','S','M'] },
+  ],
+  meshkuj: [
+    { id:'m1', name:'Këmishë Oxford', price:29, img:'images/6.jpg', sizes:['M','L','XL','XXL'] },
+    { id:'m2', name:'Pantallona Chino', price:34, img:'images/7.jpg', sizes:['S','M','L','XL'] },
+    { id:'m3', name:'Xhaketë Casual', price:52, img:'images/8.jpg', sizes:['M','L','XL','XXL'] },
+    { id:'m4', name:'Polo Verore', price:22, img:'images/9.jpg', sizes:['S','M','L','XL','XXL'] },
+    { id:'m5', name:'Set Sporti', price:41, img:'images/10.jpg', sizes:['M','L','XL'] },
+  ]
+};
+
+// ─── STATE ───
+let cart = [];
+let selectedSizes = {}; // productId -> selectedSize
+
+// ─── RENDER PRODUCTS ───
+function renderProducts(cat, filterSize = 'all') {
+  const grid = document.getElementById('grid-' + cat);
+  const list = products[cat].filter(p =>
+    filterSize === 'all' || p.sizes.includes(filterSize)
+  );
+
+  grid.innerHTML = list.map(p => {
+    const sizeHtml = p.sizes.map(s => `
+      <button class="ps-btn ${selectedSizes[p.id]===s?'selected':''}"
+        onclick="selectSize('${p.id}','${s}',this)">${s}</button>
+    `).join('');
+
+    return `
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <span class="product-cat-badge">${cat === 'femra' ? 'Femra' : 'Meshkuj'}</span>
+        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&auto=format&fit=crop&q=80'" loading="lazy">
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price-row">
+          <div class="product-price">${p.price}<span>€</span></div>
+        </div>
+        <div class="product-sizes-row">${sizeHtml}</div>
+        <button class="add-to-cart-btn" onclick="addToCart('${p.id}','${cat}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Shto në Shportë
+        </button>
+        <a href="product-detail.html?id=${p.id}&cat=${cat}" class="view-detail-btn">Shiko Detajet →</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Re-observe new cards
+  grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+function selectSize(productId, size, btn) {
+  selectedSizes[productId] = size;
+  // Update UI — remove selected from siblings
+  btn.closest('.product-sizes-row').querySelectorAll('.ps-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+// ─── TABS ───
+function switchTab(cat) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.products-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + cat).classList.add('active');
+  document.getElementById('section-' + cat).classList.add('active');
+}
+
+// ─── SIZE FILTER ───
+function filterSize(btn, cat, size) {
+  btn.closest('.size-filter').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat, size);
+}
+
+// ─── CART ───
+function addToCart(productId, cat) {
+  const product = products[cat].find(p => p.id === productId);
+  const size = selectedSizes[productId];
+
+  if (!size) {
+    showToast('⚠ Zgjidhni madhësinë fillimisht!', true);
+    return;
+  }
+
+  // Check if same product+size already in cart
+  const existing = cart.find(i => i.id === productId && i.size === size);
+  if (existing) {
+    showToast('Produkti është tashmë në shportë!', false);
+    return;
+  }
+
+  cart.push({ ...product, size, cat });
+  updateCartUI();
+  showToast(`${product.name} (${size}) u shtua! ✓`);
+}
+
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.length;
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = count;
+  countEl.classList.toggle('has-items', count > 0);
+
+  const subtotal = cart.reduce((sum, i) => sum + i.price, 0);
+  const total = subtotal + 4;
+
+  document.getElementById('subtotalVal').textContent = subtotal + '€';
+  document.getElementById('totalVal').textContent = total + '€';
+
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+
+  if (count === 0) {
+    itemsEl.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Shporta juaj është bosh</p></div>`;
+    footerEl.style.display = 'none';
+  } else {
+    itemsEl.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <img class="cart-item-img" src="${item.img}"
+          onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&auto=format&fit=crop&q=80'"
+          alt="${item.name}">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-size">Masa: ${item.size} · ${item.cat === 'femra' ? 'Femra' : 'Meshkuj'}</div>
+          <div class="cart-item-price">${item.price}€</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${idx})">×</button>
+      </div>
+    `).join('');
+    footerEl.style.display = 'block';
+  }
+}
+
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+
+// ─── CHECKOUT ───
+function openCheckout() {
+  closeCart();
+  // Populate modal order summary
+  const subtotal = cart.reduce((sum, i) => sum + i.price, 0);
+  const total = subtotal + 4;
+  document.getElementById('modalSubtotal').textContent = subtotal + '€';
+  document.getElementById('modalTotal').textContent = total + '€';
+  document.getElementById('modalOrderItems').innerHTML = cart.map(i => `
+    <div class="order-item-row"><span>${i.name}</span><span>${i.price}€</span></div>
+    <div class="order-item-row size-row"><span>Masa: ${i.size}</span></div>
+  `).join('');
+  document.getElementById('checkoutModal').classList.add('open');
+}
+function closeCheckout() {
+  document.getElementById('checkoutModal').classList.remove('open');
+}
+
+function placeOrder() {
+  const name = document.getElementById('f-name').value.trim();
+  const surname = document.getElementById('f-surname').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const address = document.getElementById('f-address').value.trim();
+
+  if (!name || !surname || !phone || !address) {
+    showToast('⚠ Plotësoni të gjitha fushat e detyrueshme!', false);
+    return;
+  }
+
+  const total = cart.reduce((s, i) => s + i.price, 0) + 4;
+  document.getElementById('successMsg').textContent =
+    `Faleminderit ${name}! Porosia juaj (${total}€) u pranua. Do t'ju kontaktojmë në ${phone} për të konfirmuar dërgimin. Pagesa bëhet me cash pas marrjes.`;
+
+  closeCheckout();
+  cart = [];
+  updateCartUI();
+  // Clear form
+  ['f-name','f-surname','f-phone','f-address','f-email'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  document.getElementById('successOverlay').classList.add('open');
+}
+
+function closeSuccess() {
+  document.getElementById('successOverlay').classList.remove('open');
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── THREE.JS HERO ───
 (function() {
   const canvas = document.getElementById('oe-canvas');
-  if (!canvas) return;
-
+  if (!canvas || typeof THREE === 'undefined') return;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   const W = canvas.parentElement.offsetWidth;
   const H = canvas.parentElement.offsetHeight;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
-
   const scene = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(70, W / H, 0.1, 500);
+  const cam = new THREE.PerspectiveCamera(70, W/H, 0.1, 500);
   cam.position.z = 20;
-
-  // Teal flowing lines (geometry)
   const lines = [];
   for (let i = 0; i < 12; i++) {
     const pts = [];
@@ -942,57 +1618,48 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
     const geo = new THREE.BufferGeometry().setFromPoints(pts);
     const mat = new THREE.LineBasicMaterial({
       color: i % 3 === 0 ? 0x00B4CC : (i % 3 === 1 ? 0x006880 : 0x003344),
-      transparent: true,
-      opacity: 0.15 + Math.random() * 0.25,
+      transparent: true, opacity: 0.15 + Math.random() * 0.25,
     });
     const line = new THREE.Line(geo, mat);
     scene.add(line);
     lines.push({ line, speed: 0.003 + Math.random() * 0.004, offset: i * 0.5 });
   }
-
-  // Teal particles
   const pCount = 600;
   const pos = new Float32Array(pCount * 3);
   for (let i = 0; i < pCount; i++) {
-    pos[i*3]   = (Math.random() - 0.5) * 50;
-    pos[i*3+1] = (Math.random() - 0.5) * 35;
-    pos[i*3+2] = (Math.random() - 0.5) * 20;
+    pos[i*3] = (Math.random()-0.5)*50;
+    pos[i*3+1] = (Math.random()-0.5)*35;
+    pos[i*3+2] = (Math.random()-0.5)*20;
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const pMat = new THREE.PointsMaterial({ color: 0x00B4CC, size: 0.12, transparent: true, opacity: 0.5 });
-  scene.add(new THREE.Points(pGeo, pMat));
-
+  scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x00B4CC, size: 0.12, transparent: true, opacity: 0.5 })));
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
     t += 0.01;
     lines.forEach(({ line, speed, offset }) => {
       line.rotation.z = Math.sin(t * speed * 20 + offset) * 0.04;
-      const pos = line.geometry.attributes.position;
-      for (let i = 0; i < pos.count; i++) {
-        const x = pos.getX(i);
-        pos.setY(i, pos.getY(i) + Math.sin(x * 0.4 + t + offset) * 0.002);
+      const p = line.geometry.attributes.position;
+      for (let i = 0; i < p.count; i++) {
+        p.setY(i, p.getY(i) + Math.sin(p.getX(i) * 0.4 + t + offset) * 0.002);
       }
-      pos.needsUpdate = true;
+      p.needsUpdate = true;
     });
     renderer.render(scene, cam);
   }
   animate();
-
   window.addEventListener('resize', () => {
     const nW = canvas.parentElement.offsetWidth;
     const nH = canvas.parentElement.offsetHeight;
-    cam.aspect = nW / nH;
-    cam.updateProjectionMatrix();
+    cam.aspect = nW/nH; cam.updateProjectionMatrix();
     renderer.setSize(nW, nH);
   });
 })();
 
-// ─── NAVBAR SCROLL ───
-const nav = document.getElementById('navbar');
+// ─── NAV SCROLL ───
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
 });
 
 // ─── HAMBURGER ───
@@ -1003,15 +1670,31 @@ hbg.addEventListener('click', () => {
   mob.classList.toggle('open');
 });
 document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => {
-  hbg.classList.remove('open');
-  mob.classList.remove('open');
+  hbg.classList.remove('open'); mob.classList.remove('open');
 }));
+
+// ─── CURSOR ───
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function moveCursor() {
+  rx += (mx-rx)*0.14; ry += (my-ry)*0.14;
+  if(cur){ cur.style.left=mx+'px'; cur.style.top=my+'px'; }
+  if(ring){ ring.style.left=rx+'px'; ring.style.top=ry+'px'; }
+  requestAnimationFrame(moveCursor);
+})();
 
 // ─── REVEAL ───
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
+
+// ─── INIT ───
+renderProducts('femra');
+renderProducts('meshkuj');
 </script>
-</body>
-  </html>
+
+
+</body></html>
