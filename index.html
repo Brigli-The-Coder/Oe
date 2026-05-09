@@ -1,753 +1,722 @@
-<html lang="sq"><head>
+<!DOCTYPE html>
+<html lang="sq">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fashion Montenegro — Shkodër</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=DM+Sans:wght@300;400;500&amp;family=Space+Grotesk:wght@300;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Helvetica+Neue:wght@100;300;400&family=Epilogue:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F8F6F1;
-  --ink: #0D0D0D;
-  --teal: #00B4CC;
-  --teal-light: #E0F7FA;
-  --teal-mid: #007A8C;
-  --cream: #EDE9E0;
-  --mid: #888580;
-  --white: #FFFFFF;
+  --black: #0A0A0A;
+  --white: #FAFAFA;
+  --grey-100: #F2F2F2;
+  --grey-200: #E0E0E0;
+  --grey-400: #9E9E9E;
+  --grey-600: #616161;
+  --grey-800: #212121;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Epilogue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
   overflow-x: hidden;
   cursor: none;
 }
 
-/* ─── CUSTOM CURSOR ─── */
+/* ─── CURSOR ─── */
 #cursor {
   position: fixed; top: 0; left: 0;
-  width: 12px; height: 12px;
-  background: var(--teal);
+  width: 8px; height: 8px;
+  background: var(--black);
   border-radius: 50%;
   pointer-events: none; z-index: 9999;
   transform: translate(-50%,-50%);
-  transition: transform 0.1s, width 0.25s, height 0.25s, background 0.25s;
-  mix-blend-mode: multiply;
+  transition: width .2s, height .2s, background .2s;
 }
 #cursor-ring {
   position: fixed; top: 0; left: 0;
-  width: 40px; height: 40px;
-  border: 1px solid var(--teal);
+  width: 36px; height: 36px;
+  border: 1px solid var(--black);
   border-radius: 50%;
   pointer-events: none; z-index: 9998;
   transform: translate(-50%,-50%);
-  transition: transform 0.18s ease, width 0.3s, height 0.3s;
-  opacity: 0.5;
+  transition: transform .15s ease, width .25s, height .25s, opacity .25s;
+  opacity: 0.35;
 }
-body:has(a:hover) #cursor, body:has(button:hover) #cursor {
-  width: 28px; height: 28px; background: var(--teal-mid);
-}
+body:has(a:hover) #cursor,
+body:has(button:hover) #cursor { width: 24px; height: 24px; background: var(--grey-600); }
+body:has(a:hover) #cursor-ring,
+body:has(button:hover) #cursor-ring { opacity: 0; }
 
-/* ─── NAVBAR ─── */
+/* ─── NAV ─── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 3rem; height: 68px;
-  transition: background 0.4s, box-shadow 0.4s;
+  padding: 0 2.5rem; height: 60px;
+  transition: background .3s, border-color .3s;
+  border-bottom: 1px solid transparent;
 }
 nav.scrolled {
-  background: rgba(248,246,241,0.96);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+  background: rgba(250,250,250,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom-color: var(--grey-200);
 }
 .nav-brand {
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none;
+  text-decoration: none; display: flex; flex-direction: column;
+  line-height: 1.1;
 }
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 900;
-  color: var(--ink); letter-spacing: -0.5px;
-  line-height: 1;
+.nav-brand-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; letter-spacing: 6px;
+  text-transform: uppercase; color: var(--black);
 }
-.nav-logo .country { color: var(--teal); font-style: italic; }
-.nav-shop-label {
-  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--mid); font-family: 'DM Sans', sans-serif;
-  font-weight: 400; border-left: 1px solid var(--cream);
-  padding-left: 12px; margin-left: 4px;
-  line-height: 1.3;
+.nav-brand-sub {
+  font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--grey-400); font-weight: 300;
 }
-.nav-right { display: flex; align-items: center; gap: 2rem; }
+
 .nav-links {
-  display: flex; align-items: center; gap: 2.5rem;
-  list-style: none;
+  display: flex; gap: 2.5rem; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
 }
 .nav-links a {
-  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-  font-weight: 500; color: var(--ink); text-decoration: none;
-  position: relative; padding-bottom: 3px;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; color: var(--black); text-decoration: none;
+  transition: color .2s;
 }
-.nav-links a::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 0; width: 0; height: 1.5px;
-  background: var(--teal); transition: width 0.3s;
-}
-.nav-links a:hover::after { width: 100%; }
-.nav-links a:hover { color: var(--teal-mid); }
+.nav-links a:hover { color: var(--grey-400); }
 
-/* Cart icon in nav */
+.nav-right { display: flex; align-items: center; gap: 2rem; }
 .cart-nav-btn {
-  position: relative; background: none; border: none;
-  cursor: pointer; color: var(--ink);
-  display: flex; align-items: center; gap: 6px;
-  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-  font-weight: 500; font-family: 'DM Sans', sans-serif;
-  padding: 8px 0;
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: none; cursor: pointer;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; font-family: 'Epilogue', sans-serif; color: var(--black);
+  position: relative;
 }
-.cart-nav-btn svg { width: 20px; height: 20px; }
+.cart-nav-btn svg { width: 18px; height: 18px; }
 .cart-count {
-  position: absolute; top: 0; right: -8px;
-  background: var(--teal); color: var(--ink);
-  width: 17px; height: 17px; border-radius: 50%;
-  font-size: 9px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.3s, transform 0.3s;
-  transform: scale(0.5);
+  position: absolute; top: -4px; right: -10px;
+  background: var(--black); color: var(--white);
+  width: 16px; height: 16px; border-radius: 50%;
+  font-size: 8px; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s, transform .3s; transform: scale(.4);
 }
 .cart-count.has-items { opacity: 1; transform: scale(1); }
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
-  cursor: pointer; z-index: 1002; background: none; border: none;
+  cursor: pointer; background: none; border: none; z-index: 1002;
 }
-.hamburger span {
-  display: block; width: 24px; height: 1.5px;
-  background: var(--ink); transition: all 0.3s;
-}
-.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger span { display: block; width: 22px; height: 1px; background: var(--black); transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
 .mobile-menu {
-  display: none;
-  position: fixed; inset: 0;
-  background: var(--ink);
+  display: none; position: fixed; inset: 0;
+  background: var(--white);
   flex-direction: column; align-items: center; justify-content: center;
-  gap: 2.5rem; z-index: 1001;
+  gap: 3rem; z-index: 1001;
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px; font-weight: 700;
-  color: var(--white); text-decoration: none;
-  transition: color 0.2s;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--black); text-decoration: none;
+  transition: color .2s;
 }
-.mobile-menu a:hover { color: var(--teal); }
+.mobile-menu a:hover { color: var(--grey-400); }
 
 /* ─── HERO ─── */
 #hero {
   height: 100vh; min-height: 700px;
   display: grid; grid-template-columns: 1fr 1fr;
-  overflow: hidden; position: relative;
+  overflow: hidden;
 }
 .hero-left {
-  background: var(--ink);
+  background: var(--black);
   display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 0 3.5rem 4rem;
+  justify-content: flex-end; padding: 0 3rem 4.5rem;
   position: relative; overflow: hidden;
 }
 .hero-canvas-wrap {
-  position: absolute; inset: 0; z-index: 0;
-  opacity: 0.6;
+  position: absolute; inset: 0; z-index: 0; opacity: 0.4;
 }
 #oe-canvas { width: 100%; height: 100%; display: block; }
 .hero-left-content { position: relative; z-index: 2; }
+
 .hero-eyebrow {
   font-size: 9px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--teal); font-weight: 500; margin-bottom: 1rem;
+  color: var(--grey-400); margin-bottom: 1.8rem; font-weight: 300;
 }
 .hero-big {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 6vw, 88px);
-  font-weight: 900; color: var(--white);
-  line-height: 0.95; letter-spacing: -2px;
-  margin-bottom: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 110px);
+  font-weight: 300; color: var(--white);
+  line-height: 0.92; letter-spacing: -1px;
+  margin-bottom: 2.5rem;
 }
-.hero-big .italic { font-style: italic; color: var(--teal); }
+.hero-big .italic { font-style: italic; color: var(--grey-400); }
 .hero-desc {
-  font-size: 13px; color: rgba(255,255,255,0.5);
-  max-width: 300px; line-height: 1.9;
-  font-weight: 300; margin-bottom: 2.5rem;
+  font-size: 12px; color: var(--grey-600);
+  max-width: 280px; line-height: 2;
+  font-weight: 300; margin-bottom: 3rem;
+  letter-spacing: 0.5px;
 }
-
-/* Category split buttons */
-.hero-cats {
-  display: flex; gap: 12px; flex-wrap: wrap;
-}
+.hero-cats { display: flex; gap: 10px; flex-wrap: wrap; }
 .hero-cat-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 24px; text-decoration: none;
-  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; transition: all 0.3s; cursor: pointer;
-  border: none; font-family: 'DM Sans', sans-serif;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 13px 26px; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; font-weight: 300; cursor: pointer;
+  border: none; font-family: 'Epilogue', sans-serif;
+  transition: all .25s;
 }
-.hero-cat-btn.primary { background: var(--teal); color: var(--ink); }
-.hero-cat-btn.primary:hover { background: var(--white); }
+.hero-cat-btn.primary { background: var(--white); color: var(--black); }
+.hero-cat-btn.primary:hover { background: var(--grey-200); }
 .hero-cat-btn.secondary {
   background: transparent; color: var(--white);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
 }
-.hero-cat-btn.secondary:hover { border-color: var(--teal); color: var(--teal); }
-.hero-cat-btn svg { width: 15px; height: 15px; }
+.hero-cat-btn.secondary:hover { border-color: rgba(255,255,255,0.6); }
+.hero-cat-btn svg { width: 13px; height: 13px; }
 
-.hero-right {
-  position: relative; overflow: hidden;
-  background: var(--cream);
-}
+.hero-right { position: relative; overflow: hidden; }
 .hero-right img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: brightness(0.95);
-  transform: scale(1.05);
-  transition: transform 8s ease;
+  filter: grayscale(100%) contrast(1.05) brightness(0.9);
+  transform: scale(1.04);
+  transition: transform 9s ease;
 }
 .hero-right:hover img { transform: scale(1); }
+
 .hero-badge {
-  position: absolute; top: 2.5rem; right: 2.5rem;
-  background: var(--white);
-  padding: 1.2rem 1.5rem;
+  position: absolute; bottom: 3rem; right: 2.5rem;
+  background: var(--white); padding: 1.5rem 1.8rem;
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
-.hero-badge-stars { color: #FFB800; font-size: 18px; letter-spacing: 2px; }
+.hero-badge-stars { color: var(--black); font-size: 13px; letter-spacing: 3px; }
 .hero-badge-score {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px; font-weight: 900; line-height: 1; color: var(--ink);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 300; line-height: 1.1; color: var(--black);
 }
-.hero-badge-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--mid); margin-top: 4px; }
+.hero-badge-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey-400); margin-top: 4px; }
+
 .hero-scroll {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mid); z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: 7px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--grey-400); z-index: 3;
 }
 .scroll-arrow {
-  width: 20px; height: 20px;
-  border-right: 1.5px solid var(--teal);
-  border-bottom: 1.5px solid var(--teal);
+  width: 16px; height: 16px;
+  border-right: 1px solid var(--grey-400);
+  border-bottom: 1px solid var(--grey-400);
   transform: rotate(45deg);
-  animation: bounceDown 1.5s ease-in-out infinite;
+  animation: bounceDown 2s ease-in-out infinite;
 }
 @keyframes bounceDown {
-  0%,100% { transform: rotate(45deg) translateY(0); opacity:0.4; }
-  50% { transform: rotate(45deg) translateY(5px); opacity:1; }
+  0%,100% { transform: rotate(45deg) translateY(0); opacity: .3; }
+  50% { transform: rotate(45deg) translateY(5px); opacity: 1; }
 }
 
 /* ─── TICKER ─── */
 .ticker {
   overflow: hidden; white-space: nowrap;
-  background: var(--teal); padding: 12px 0;
+  background: var(--black); padding: 11px 0;
+  border-top: none;
 }
 .ticker-track {
   display: inline-flex;
-  animation: ticker 22s linear infinite;
+  animation: ticker 28s linear infinite;
 }
 .ticker-track span {
-  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-  font-weight: 500; color: var(--ink);
-  padding: 0 2.5rem;
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  font-weight: 300; color: var(--white); padding: 0 2.5rem;
 }
-.ticker-track .dot { opacity: 0.4; }
+.ticker-track .dot { color: var(--grey-600); }
 @keyframes ticker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-/* ─── CATEGORY TABS ─── */
-#shop { padding: 80px 3rem; background: var(--bg); }
+/* ─── SHOP ─── */
+#shop { padding: 80px 2.5rem 100px; background: var(--white); }
 .shop-header {
   display: flex; align-items: flex-end; justify-content: space-between;
-  margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1.5rem;
+  margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem;
+  border-bottom: 1px solid var(--grey-200); padding-bottom: 2rem;
 }
-.shop-title-group {}
-.shop-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+.shop-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--grey-400); margin-bottom: 0.8rem; font-weight: 300; }
 .shop-main-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 4.5vw, 62px);
-  font-weight: 900; line-height: 1; letter-spacing: -1.5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300; line-height: 0.95; letter-spacing: 2px;
+  text-transform: uppercase;
 }
-.shop-main-title em { font-style: italic; color: var(--teal); }
+.shop-main-title em { font-style: italic; color: var(--grey-400); }
 
-/* Category tab switcher */
-.cat-tabs {
-  display: flex; gap: 4px;
-  background: var(--cream); padding: 4px;
-}
+.cat-tabs { display: flex; gap: 0; }
 .cat-tab {
-  padding: 10px 24px;
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 700; cursor: pointer; border: none;
-  background: transparent; color: var(--mid);
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.25s;
+  padding: 10px 28px;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer; border: 1px solid var(--grey-200);
+  background: transparent; color: var(--grey-400);
+  font-family: 'Epilogue', sans-serif; transition: all .2s;
 }
-.cat-tab.active { background: var(--ink); color: var(--white); }
-.cat-tab:not(.active):hover { color: var(--ink); }
+.cat-tab:not(:last-child) { border-right: none; }
+.cat-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.cat-tab:not(.active):hover { color: var(--black); border-color: var(--black); }
 
-/* ─── PRODUCTS GRID ─── */
 .products-section { display: none; }
 .products-section.active { display: block; }
 
-/* Size filter */
 .size-filter {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 2rem; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 2.5rem; flex-wrap: wrap;
 }
 .size-filter-label {
-  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mid); font-weight: 500;
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--grey-400); margin-right: 6px; font-weight: 300;
 }
 .size-btn {
-  padding: 6px 14px; border: 1px solid var(--cream);
-  background: var(--white); font-size: 11px;
-  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
-  color: var(--ink); transition: all 0.2s;
+  padding: 5px 13px; border: 1px solid var(--grey-200);
+  background: var(--white); font-size: 10px; font-weight: 300;
+  cursor: pointer; font-family: 'Epilogue', sans-serif; color: var(--grey-600);
+  transition: all .2s; letter-spacing: 1px;
 }
-.size-btn:hover, .size-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.size-btn:hover, .size-btn.active {
+  background: var(--black); color: var(--white); border-color: var(--black);
+}
 
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 1px; background: var(--grey-200);
 }
 
 /* ─── PRODUCT CARD ─── */
 .product-card {
-  background: var(--white);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: var(--white); cursor: pointer;
+  transition: background .25s;
   position: relative;
 }
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
-}
+.product-card:hover { background: var(--grey-100); }
+
 .product-img-wrap {
   position: relative; overflow: hidden;
-  aspect-ratio: 3/4;
-  background: var(--cream);
+  aspect-ratio: 3/4; background: var(--grey-100);
 }
 .product-img-wrap img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  transition: transform 0.6s;
+  filter: grayscale(100%) contrast(1.05);
+  transition: transform .7s ease, filter .5s;
 }
-.product-card:hover .product-img-wrap img { transform: scale(1.06); }
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.04);
+  filter: grayscale(100%) contrast(1.08);
+}
 
-/* Category badge */
 .product-cat-badge {
-  position: absolute; top: 12px; left: 12px;
-  background: var(--teal); color: var(--ink);
+  position: absolute; top: 14px; left: 14px;
+  background: var(--white); color: var(--black);
   font-size: 7px; letter-spacing: 3px; text-transform: uppercase;
-  font-weight: 700; padding: 4px 10px;
+  font-weight: 300; padding: 4px 10px; border: 1px solid var(--grey-200);
 }
 
-.product-info { padding: 1rem 1.2rem 1.4rem; }
+.product-info { padding: 1.2rem 1.4rem 1.6rem; border-top: 1px solid var(--grey-200); }
 .product-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px; font-weight: 700;
-  color: var(--ink); margin-bottom: 6px; line-height: 1.2;
-}
-.product-price-row {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 400; letter-spacing: 1px;
+  color: var(--black); margin-bottom: 8px; line-height: 1.2;
 }
 .product-price {
-  font-size: 20px; font-weight: 700;
-  color: var(--ink); letter-spacing: -0.5px;
+  font-size: 14px; font-weight: 300; color: var(--black);
+  letter-spacing: 1px; margin-bottom: 14px;
 }
-.product-price span { color: var(--teal); font-size: 14px; }
+.product-price span { color: var(--grey-400); font-size: 12px; }
 
-/* Quick size select on card */
 .product-sizes-row {
-  display: flex; gap: 5px; flex-wrap: wrap;
-  margin-bottom: 12px;
+  display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 14px;
 }
 .ps-btn {
-  padding: 4px 9px; border: 1px solid var(--cream);
-  background: transparent; font-size: 10px;
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  color: var(--mid); transition: all 0.2s;
+  padding: 4px 10px; border: 1px solid var(--grey-200);
+  background: transparent; font-size: 9px; letter-spacing: 1px;
+  cursor: pointer; font-family: 'Epilogue', sans-serif;
+  color: var(--grey-600); transition: all .2s;
 }
-.ps-btn:hover, .ps-btn.selected { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.ps-btn:hover, .ps-btn.selected {
+  background: var(--black); color: var(--white); border-color: var(--black);
+}
 
 .add-to-cart-btn {
   width: 100%; padding: 11px;
-  background: var(--ink); color: var(--white);
-  border: none; font-size: 9px;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background 0.25s;
+  background: var(--black); color: var(--white);
+  border: none; font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer;
+  font-family: 'Epilogue', sans-serif; transition: background .2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.add-to-cart-btn:hover { background: var(--teal); color: var(--ink); }
-.add-to-cart-btn svg { width: 14px; height: 14px; }
+.add-to-cart-btn:hover { background: var(--grey-800); }
+.add-to-cart-btn svg { width: 13px; height: 13px; }
+
 .view-detail-btn {
-  display: block; text-align: center;
-  padding: 7px;
-  background: transparent; color: var(--mid);
-  border: 1px solid var(--cream);
-  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif;
-  text-decoration: none; margin-top: 6px;
-  transition: all 0.2s;
+  display: block; text-align: center; padding: 8px;
+  background: transparent; color: var(--grey-400);
+  border: 1px solid var(--grey-200);
+  font-size: 7px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer; font-family: 'Epilogue', sans-serif;
+  text-decoration: none; margin-top: 5px; transition: all .2s;
 }
-.view-detail-btn:hover { color: var(--teal); border-color: var(--teal); }
+.view-detail-btn:hover { color: var(--black); border-color: var(--black); }
 
 /* ─── CART DRAWER ─── */
 .cart-overlay {
   position: fixed; inset: 0;
-  background: rgba(13,13,13,0.5);
+  background: rgba(10,10,10,0.4);
   z-index: 2000; opacity: 0;
-  pointer-events: none; transition: opacity 0.3s;
+  pointer-events: none; transition: opacity .3s;
 }
 .cart-overlay.open { opacity: 1; pointer-events: all; }
 
 .cart-drawer {
   position: fixed; top: 0; right: -100%;
-  width: 420px; max-width: 100vw; height: 100vh;
+  width: 400px; max-width: 100vw; height: 100vh;
   background: var(--white); z-index: 2001;
   display: flex; flex-direction: column;
-  transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+  transition: right .4s cubic-bezier(.4,0,.2,1);
+  border-left: 1px solid var(--grey-200);
 }
 .cart-drawer.open { right: 0; }
 
 .cart-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.5rem 1.8rem;
-  border-bottom: 1px solid var(--cream);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--grey-200);
 }
 .cart-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;
 }
-.cart-close-btn {
-  background: none; border: none; cursor: pointer;
-  color: var(--ink); padding: 4px;
-}
-.cart-close-btn svg { width: 22px; height: 22px; }
+.cart-close-btn { background: none; border: none; cursor: pointer; color: var(--black); padding: 4px; }
+.cart-close-btn svg { width: 20px; height: 20px; }
 
-.cart-items { flex: 1; overflow-y: auto; padding: 1.2rem 1.8rem; }
+.cart-items { flex: 1; overflow-y: auto; padding: 1.2rem 2rem; }
 .cart-empty {
   display: flex; flex-direction: column; align-items: center;
   justify-content: center; height: 60%;
-  color: var(--mid); text-align: center; gap: 1rem;
+  color: var(--grey-400); text-align: center; gap: 1.2rem;
 }
-.cart-empty svg { width: 48px; height: 48px; opacity: 0.3; }
-.cart-empty p { font-size: 13px; letter-spacing: 1px; }
+.cart-empty svg { width: 40px; height: 40px; opacity: 0.2; }
+.cart-empty p { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 300; }
 
 .cart-item {
-  display: flex; gap: 1rem; padding: 1rem 0;
-  border-bottom: 1px solid var(--cream);
+  display: flex; gap: 1.2rem; padding: 1.2rem 0;
+  border-bottom: 1px solid var(--grey-200);
 }
 .cart-item-img {
-  width: 70px; height: 90px;
-  object-fit: cover; background: var(--cream);
-  flex-shrink: 0;
+  width: 65px; height: 85px;
+  object-fit: cover; filter: grayscale(100%); flex-shrink: 0;
+  background: var(--grey-100);
 }
 .cart-item-info { flex: 1; }
 .cart-item-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px; font-weight: 700;
-  color: var(--ink); margin-bottom: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 400; margin-bottom: 5px; letter-spacing: 1px;
 }
 .cart-item-size {
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); margin-bottom: 8px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--grey-400); margin-bottom: 10px;
 }
-.cart-item-price {
-  font-size: 16px; font-weight: 700; color: var(--ink);
-}
+.cart-item-price { font-size: 14px; font-weight: 300; color: var(--black); }
 .cart-item-remove {
   background: none; border: none; cursor: pointer;
-  color: var(--mid); font-size: 18px; align-self: flex-start;
-  padding: 0;
+  color: var(--grey-400); font-size: 16px; align-self: flex-start;
+  transition: color .2s;
 }
-.cart-item-remove:hover { color: #cc0000; }
+.cart-item-remove:hover { color: var(--black); }
 
-.cart-footer { padding: 1.5rem 1.8rem; border-top: 1px solid var(--cream); }
+.cart-footer { padding: 1.5rem 2rem; border-top: 1px solid var(--grey-200); }
 .cart-shipping-note {
   display: flex; align-items: center; gap: 8px;
-  background: var(--teal-light);
-  padding: 10px 14px; margin-bottom: 1rem;
-  font-size: 12px; color: var(--teal-mid); font-weight: 500;
+  padding: 10px 0; margin-bottom: 1rem;
+  font-size: 10px; color: var(--grey-600); letter-spacing: 1px;
+  border-bottom: 1px solid var(--grey-200);
 }
-.cart-shipping-note svg { width: 15px; height: 15px; flex-shrink: 0; }
-.cart-summary { margin-bottom: 1.2rem; }
+.cart-shipping-note svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.cart-summary { margin-bottom: 1.5rem; }
 .cart-summary-row {
   display: flex; justify-content: space-between;
-  font-size: 13px; color: #666; padding: 5px 0;
+  font-size: 11px; color: var(--grey-400); padding: 6px 0;
+  letter-spacing: 1px; text-transform: uppercase;
 }
 .cart-summary-row.total {
-  font-size: 17px; font-weight: 700;
-  color: var(--ink); border-top: 1.5px solid var(--ink);
-  margin-top: 6px; padding-top: 10px;
+  font-size: 14px; color: var(--black);
+  border-top: 1px solid var(--black); margin-top: 8px; padding-top: 12px;
+  font-weight: 300; letter-spacing: 2px;
 }
+
 .cart-checkout-btn {
-  width: 100%; padding: 16px;
-  background: var(--teal); color: var(--ink);
-  border: none; font-size: 10px;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background 0.25s;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px;
+  background: var(--black); color: var(--white);
+  border: none; font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer; font-family: 'Epilogue', sans-serif;
+  transition: background .2s;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
 }
-.cart-checkout-btn:hover { background: var(--teal-mid); color: var(--white); }
-.cart-checkout-btn svg { width: 16px; height: 16px; }
+.cart-checkout-btn:hover { background: var(--grey-800); }
+.cart-checkout-btn svg { width: 14px; height: 14px; }
 
 /* ─── CHECKOUT MODAL ─── */
 .modal-overlay {
   position: fixed; inset: 0;
-  background: rgba(13,13,13,0.6);
+  background: rgba(10,10,10,0.5);
   z-index: 3000; display: none;
-  align-items: center; justify-content: center;
-  padding: 1rem;
+  align-items: center; justify-content: center; padding: 1rem;
 }
 .modal-overlay.open { display: flex; }
 .modal {
-  background: var(--white);
-  width: 100%; max-width: 540px;
+  background: var(--white); width: 100%; max-width: 520px;
   max-height: 90vh; overflow-y: auto;
-  position: relative;
+  border: 1px solid var(--grey-200);
 }
 .modal-header {
-  padding: 2rem 2rem 1.2rem;
-  border-bottom: 1px solid var(--cream);
+  padding: 2rem 2.2rem 1.5rem;
+  border-bottom: 1px solid var(--grey-200);
   display: flex; align-items: center; justify-content: space-between;
 }
 .modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px; font-weight: 900; letter-spacing: -0.5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;
 }
-.modal-close {
-  background: none; border: none; cursor: pointer;
-  color: var(--ink); font-size: 22px; line-height: 1;
-}
-.modal-body { padding: 1.8rem 2rem; }
+.modal-close { background: none; border: none; cursor: pointer; color: var(--black); font-size: 18px; }
+.modal-body { padding: 2rem 2.2rem; }
 
-/* Order summary in modal */
 .order-summary-box {
-  background: var(--bg);
-  padding: 1.2rem 1.4rem;
-  margin-bottom: 1.8rem;
+  background: var(--grey-100); padding: 1.4rem;
+  margin-bottom: 2rem;
 }
 .order-summary-title {
-  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mid); margin-bottom: 1rem;
+  font-size: 8px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--grey-400); margin-bottom: 1rem;
 }
 .order-item-row {
   display: flex; justify-content: space-between;
-  font-size: 13px; color: var(--ink);
-  padding: 4px 0;
+  font-size: 13px; color: var(--black); padding: 4px 0;
 }
-.order-item-row.size-row { color: var(--mid); font-size: 11px; }
-.order-divider { border: none; border-top: 1px solid var(--cream); margin: 8px 0; }
+.order-item-row.size-row { color: var(--grey-400); font-size: 10px; letter-spacing: 1px; }
+.order-divider { border: none; border-top: 1px solid var(--grey-200); margin: 10px 0; }
 .order-subtotal, .order-shipping, .order-total {
   display: flex; justify-content: space-between;
-  font-size: 13px; padding: 4px 0;
+  font-size: 12px; padding: 4px 0; letter-spacing: 1px;
 }
-.order-shipping { color: var(--mid); }
-.order-total { font-weight: 700; font-size: 16px; color: var(--ink); }
+.order-shipping { color: var(--grey-400); }
+.order-total { font-size: 15px; color: var(--black); border-top: 1px solid var(--grey-200); padding-top: 10px; margin-top: 4px; }
 
-/* Payment method banner */
 .payment-method-banner {
-  background: var(--cream); padding: 12px 16px;
+  background: var(--grey-100); padding: 12px 16px;
   display: flex; align-items: center; gap: 10px;
-  margin-bottom: 1.8rem;
-  font-size: 12px; font-weight: 500; color: var(--ink);
+  margin-bottom: 2rem; font-size: 11px; color: var(--black); letter-spacing: 1px;
 }
-.payment-method-banner svg { width: 20px; height: 20px; color: var(--teal-mid); flex-shrink: 0; }
+.payment-method-banner svg { width: 18px; height: 18px; color: var(--black); flex-shrink: 0; }
 
-/* Form */
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .form-row.single { grid-template-columns: 1fr; }
-.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-label {
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); font-weight: 500;
+  font-size: 8px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--grey-400); font-weight: 300;
 }
-.form-label .optional { color: var(--teal); }
+.form-label .optional { color: var(--grey-600); }
 .form-input {
-  padding: 11px 14px;
-  border: 1.5px solid var(--cream);
-  background: var(--white);
-  font-size: 14px; font-family: 'DM Sans', sans-serif;
-  color: var(--ink); outline: none;
-  transition: border-color 0.2s;
+  padding: 11px 12px; border: 1px solid var(--grey-200);
+  background: var(--white); font-size: 13px;
+  font-family: 'Epilogue', sans-serif; color: var(--black); outline: none;
+  transition: border-color .2s; font-weight: 300;
 }
-.form-input:focus { border-color: var(--teal); }
-.form-input::placeholder { color: #ccc; }
+.form-input:focus { border-color: var(--black); }
+.form-input::placeholder { color: var(--grey-400); }
 
 .place-order-btn {
-  width: 100%; padding: 17px;
-  background: var(--ink); color: var(--white);
-  border: none; font-size: 11px;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  font-weight: 700; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: background 0.25s;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  margin-top: 1.5rem;
+  width: 100%; padding: 16px;
+  background: var(--black); color: var(--white);
+  border: none; font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer; font-family: 'Epilogue', sans-serif;
+  transition: background .2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 1.8rem;
 }
-.place-order-btn:hover { background: var(--teal); color: var(--ink); }
-.place-order-btn svg { width: 16px; height: 16px; }
+.place-order-btn:hover { background: var(--grey-800); }
+.place-order-btn svg { width: 15px; height: 15px; }
 
-/* ─── SUCCESS MODAL ─── */
+/* ─── SUCCESS ─── */
 .success-overlay {
-  position: fixed; inset: 0;
-  background: rgba(13,13,13,0.7);
-  z-index: 4000; display: none;
-  align-items: center; justify-content: center;
+  position: fixed; inset: 0; background: rgba(10,10,10,0.6);
+  z-index: 4000; display: none; align-items: center; justify-content: center;
 }
 .success-overlay.open { display: flex; }
 .success-box {
-  background: var(--white);
-  padding: 3.5rem;
-  max-width: 440px; width: 90%;
-  text-align: center;
+  background: var(--white); padding: 4rem;
+  max-width: 420px; width: 90%; text-align: center;
+  border: 1px solid var(--grey-200);
 }
 .success-icon {
-  width: 64px; height: 64px;
-  background: var(--teal-light);
-  border-radius: 50%;
+  width: 52px; height: 52px; border: 1px solid var(--black);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.5rem;
-  color: var(--teal-mid);
+  margin: 0 auto 2rem; color: var(--black);
 }
-.success-icon svg { width: 30px; height: 30px; }
+.success-icon svg { width: 22px; height: 22px; }
 .success-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 900;
-  letter-spacing: -0.5px; margin-bottom: 0.8rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; letter-spacing: 3px;
+  text-transform: uppercase; margin-bottom: 1rem;
 }
-.success-msg {
-  font-size: 13px; color: var(--mid);
-  line-height: 1.8; margin-bottom: 2rem;
-}
+.success-msg { font-size: 12px; color: var(--grey-600); line-height: 2; margin-bottom: 2rem; }
 .success-close-btn {
-  background: var(--ink); color: var(--white);
-  border: none; padding: 13px 32px;
-  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: background 0.2s;
+  background: var(--black); color: var(--white);
+  border: none; padding: 12px 36px;
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; cursor: pointer; font-family: 'Epilogue', sans-serif;
+  transition: background .2s;
 }
-.success-close-btn:hover { background: var(--teal); color: var(--ink); }
+.success-close-btn:hover { background: var(--grey-800); }
 
-/* ─── ABOUT / FEATURES / CONTACT (from original) ─── */
-#features { padding: 90px 3rem; background: var(--ink); }
+/* ─── FEATURES ─── */
+#features { padding: 100px 2.5rem; background: var(--black); }
 .features-inner { max-width: 1200px; margin: 0 auto; }
-.features-top { margin-bottom: 3.5rem; }
-.features-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; }
+.features-top { margin-bottom: 4rem; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.features-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--grey-600); margin-bottom: 0.8rem; }
 .features-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 900; color: var(--white);
-  letter-spacing: -1px; line-height: 1.05;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4.5vw, 60px);
+  font-weight: 300; color: var(--white); letter-spacing: 3px; text-transform: uppercase; line-height: 1;
 }
-.features-title em { font-style: italic; color: var(--teal); }
-.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); }
+.features-title em { font-style: italic; color: var(--grey-600); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--grey-800); }
 .feature-card {
-  background: var(--ink); padding: 2.5rem 2rem;
-  transition: background 0.3s; border: 1px solid rgba(255,255,255,0.05);
+  background: var(--black); padding: 2.5rem 2rem;
+  transition: background .3s; border: none;
 }
-.feature-card:hover { background: #161616; }
+.feature-card:hover { background: #141414; }
 .feature-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 72px; font-weight: 900;
-  color: rgba(255,255,255,0.05); line-height: 1;
-  margin-bottom: 1rem; transition: color 0.3s;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px; font-weight: 300; color: var(--grey-800);
+  line-height: 1; margin-bottom: 1.2rem; letter-spacing: -2px;
 }
-.feature-card:hover .feature-num { color: rgba(0,180,204,0.12); }
 .feature-icon {
-  width: 44px; height: 44px;
-  border: 1px solid rgba(0,180,204,0.3);
+  width: 40px; height: 40px; border: 1px solid var(--grey-800);
   display: flex; align-items: center; justify-content: center;
-  color: var(--teal); margin-bottom: 1.2rem;
+  color: var(--grey-600); margin-bottom: 1.2rem;
 }
-.feature-icon svg { width: 20px; height: 20px; }
-.feature-h { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); margin-bottom: 0.8rem; }
-.feature-p { font-size: 13px; line-height: 1.85; color: rgba(255,255,255,0.4); font-weight: 300; }
+.feature-icon svg { width: 18px; height: 18px; }
+.feature-h {
+  font-size: 10px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.8rem;
+}
+.feature-p { font-size: 12px; line-height: 2; color: var(--grey-600); font-weight: 300; }
 
-#contact { padding: 100px 3rem; background: var(--bg); }
+/* ─── CONTACT ─── */
+#contact { padding: 100px 2.5rem; background: var(--white); }
 .contact-inner { max-width: 1100px; margin: 0 auto; }
-.contact-top { text-align: center; margin-bottom: 4rem; }
-.contact-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; }
+.contact-top { margin-bottom: 4rem; border-bottom: 1px solid var(--grey-200); padding-bottom: 2rem; }
+.contact-eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--grey-400); margin-bottom: 0.8rem; }
 .contact-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(38px, 5vw, 68px);
-  font-weight: 900; letter-spacing: -1.5px; line-height: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 70px);
+  font-weight: 300; letter-spacing: 3px; text-transform: uppercase; line-height: 0.95;
 }
-.contact-title em { font-style: italic; color: var(--teal); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
-.contact-details { display: flex; flex-direction: column; gap: 2rem; }
-.contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
-.contact-item-dot { width: 2px; height: 2px; background: var(--teal); margin-top: 8px; min-width: 2px; }
-.contact-item-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
-.contact-item-val { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.5; }
-.contact-hours { display: flex; flex-direction: column; gap: 4px; }
-.contact-hours-row { display: flex; justify-content: space-between; font-size: 13px; color: #666; font-weight: 300; padding-bottom: 4px; border-bottom: 1px solid var(--cream); }
-.contact-hours-row span:last-child { font-weight: 500; color: var(--ink); }
-.contact-map { background: var(--cream); height: 340px; position: relative; overflow: hidden; }
-.contact-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.05); }
-.contact-map-badge { position: absolute; bottom: 1.2rem; left: 1.2rem; background: var(--white); padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-.contact-map-badge svg { color: var(--teal); width: 18px; height: 18px; }
-.contact-map-badge-name { font-weight: 700; font-size: 13px; color: var(--ink); }
-.contact-map-badge-addr { font-size: 10px; color: var(--mid); }
+.contact-title em { font-style: italic; color: var(--grey-400); }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
+.contact-details { display: flex; flex-direction: column; gap: 2.5rem; }
+.contact-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+.contact-item-line { width: 1px; background: var(--grey-200); min-height: 40px; margin-top: 4px; }
+.contact-item-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey-400); margin-bottom: 6px; }
+.contact-item-val { font-size: 15px; font-weight: 300; color: var(--black); line-height: 1.7; }
+
+.contact-hours { display: flex; flex-direction: column; gap: 0; }
+.contact-hours-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--grey-600); font-weight: 300;
+  padding: 7px 0; border-bottom: 1px solid var(--grey-100);
+  letter-spacing: 0.5px;
+}
+.contact-hours-row span:last-child { font-weight: 300; color: var(--black); }
+
+.contact-map { background: var(--grey-100); height: 340px; position: relative; overflow: hidden; }
+.contact-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) contrast(1.05); }
+.contact-map-badge {
+  position: absolute; bottom: 1.2rem; left: 1.2rem;
+  background: var(--white); padding: 0.8rem 1.2rem;
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--grey-200);
+}
+.contact-map-badge svg { color: var(--black); width: 16px; height: 16px; }
+.contact-map-badge-name { font-weight: 300; font-size: 12px; color: var(--black); letter-spacing: 1px; }
+.contact-map-badge-addr { font-size: 10px; color: var(--grey-400); }
+
 .contact-phone-cta {
   margin-top: 2rem;
-  display: inline-flex; align-items: center; gap: 14px;
-  text-decoration: none; background: var(--teal); color: var(--ink);
-  padding: 15px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 700; transition: background 0.3s; width: 100%;
+  display: inline-flex; align-items: center; gap: 16px;
+  text-decoration: none; background: var(--black); color: var(--white);
+  padding: 14px 28px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; transition: background .2s; width: 100%;
 }
-.contact-phone-cta svg { width: 18px; height: 18px; }
-.contact-phone-cta:hover { background: var(--teal-mid); color: var(--white); }
+.contact-phone-cta svg { width: 16px; height: 16px; }
+.contact-phone-cta:hover { background: var(--grey-800); }
 
 /* ─── FOOTER ─── */
-footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
-.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2rem; margin-bottom: 2rem; }
-.footer-brand { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--white); letter-spacing: -1px; }
-.footer-brand em { color: var(--teal); font-style: italic; }
-.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
-.footer-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--teal); }
-.footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.5px; }
+footer { background: var(--black); padding: 3rem 2.5rem 2rem; }
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+  border-bottom: 1px solid var(--grey-800); padding-bottom: 2rem; margin-bottom: 2rem;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300; color: var(--white);
+  letter-spacing: 4px; text-transform: uppercase;
+}
+.footer-brand em { font-style: italic; color: var(--grey-600); }
+.footer-links { display: flex; gap: 2.5rem; list-style: none; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--grey-600); text-decoration: none; transition: color .2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 10px; color: var(--grey-800); letter-spacing: 1px; }
 .footer-rating { display: flex; align-items: center; gap: 8px; }
-.footer-stars { color: #FFB800; font-size: 12px; letter-spacing: 2px; }
-.footer-rating-txt { font-size: 11px; color: rgba(255,255,255,0.3); }
+.footer-stars { color: var(--grey-600); font-size: 11px; letter-spacing: 2px; }
+.footer-rating-txt { font-size: 10px; color: var(--grey-800); letter-spacing: 1px; }
 
 /* ─── REVEAL ─── */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-left { opacity: 0; transform: translateX(-24px); transition: opacity .8s ease, transform .8s ease; }
 .reveal-left.visible { opacity: 1; transform: translateX(0); }
 
 /* ─── TOAST ─── */
 .toast {
   position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
-  background: var(--ink); color: var(--white);
-  padding: 12px 24px; font-size: 11px; letter-spacing: 1.5px;
-  text-transform: uppercase; font-weight: 500;
-  z-index: 5000; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  display: flex; align-items: center; gap: 10px;
-  white-space: nowrap;
+  background: var(--black); color: var(--white);
+  padding: 12px 24px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 300; z-index: 5000; transition: transform .35s cubic-bezier(.4,0,.2,1);
+  display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  border: 1px solid var(--grey-800);
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
-.toast svg { width: 15px; height: 15px; color: var(--teal); }
+.toast svg { width: 13px; height: 13px; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 960px) {
@@ -757,16 +726,16 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
   .hero-right { display: none; }
   .hero-left { padding-bottom: 5rem; min-height: 100vh; justify-content: flex-end; }
   .features-grid { grid-template-columns: 1fr 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
   nav { padding: 0 1.5rem; }
   #shop, #features, #contact { padding: 60px 1.5rem; }
   body { cursor: auto; }
   #cursor, #cursor-ring { display: none; }
-  .products-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
 }
 @media (max-width: 540px) {
   .features-grid { grid-template-columns: 1fr; }
-  .hero-big { font-size: 48px; }
+  .hero-big { font-size: 54px; }
   .form-row { grid-template-columns: 1fr; }
   .cart-drawer { width: 100vw; }
 }
@@ -774,26 +743,24 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
 </head>
 <body>
 
-<div id="cursor" style="left: 1019px; top: 516px;"></div>
-<div id="cursor-ring" style="left: 1019px; top: 516px;"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
 <!-- NAVBAR -->
-<nav id="navbar" class="">
+<nav id="navbar">
   <a href="#" class="nav-brand">
-    <span class="nav-logo">Fashion <span class="country">Montenegro</span></span>
-    <span class="nav-shop-label">BOUTIQUE<br>SHKODËR</span>
+    <span class="nav-brand-main">Fashion Montenegro</span>
+    <span class="nav-brand-sub">Boutique · Shkodër</span>
   </a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#features">Pse Ne</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
   <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#shop">Shop</a></li>
-      <li><a href="#features">Pse Ne</a></li>
-      <li><a href="#contact">Kontakt</a></li>
-    </ul>
-    <button class="cart-nav-btn" id="cartNavBtn" onclick="openCart()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <path d="M16 10a4 4 0 01-8 0"></path>
+    <button class="cart-nav-btn" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
       </svg>
       Shporta
       <span class="cart-count" id="cartCount">0</span>
@@ -811,27 +778,27 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <div class="hero-canvas-wrap"><canvas id="oe-canvas" width="430" height="932" style="width: 430px; height: 932px;"></canvas></div>
+    <div class="hero-canvas-wrap"><canvas id="oe-canvas"></canvas></div>
     <div class="hero-left-content">
-      <p class="hero-eyebrow">Shkodër · Albania · Fashion Montenegro</p>
+      <p class="hero-eyebrow">Shkodër · Albania · Est. 2025</p>
       <h1 class="hero-big">
         Fashion<br><span class="italic">Monte</span><br>negro
       </h1>
       <p class="hero-desc">Moda bashkëkohore për femra dhe meshkuj. Stile ekzkluzive — direkt në zemrën e Shkodrës.</p>
       <div class="hero-cats">
         <button class="hero-cat-btn primary" onclick="switchTab('femra'); document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="8" r="4"></circle><path d="M12 12v8M9 19h6"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="12" cy="8" r="4"/><path d="M12 12v8M9 19h6"/></svg>
           Koleksioni Femra
         </button>
         <button class="hero-cat-btn secondary" onclick="switchTab('meshkuj'); document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="10" cy="14" r="4"></circle><path d="M21 3l-6 6M15 3h6v6"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><circle cx="10" cy="14" r="4"/><path d="M21 3l-6 6M15 3h6v6"/></svg>
           Koleksioni Meshkuj
         </button>
       </div>
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&amp;auto=format&amp;fit=crop&amp;q=85" alt="Fashion Montenegro">
+    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&auto=format&fit=crop&q=85" alt="Fashion Montenegro">
     <div class="hero-badge">
       <div class="hero-badge-stars">★★★★★</div>
       <div class="hero-badge-score">5.0</div>
@@ -848,38 +815,34 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
     <span>BOUTIQUE SHKODËR</span><span class="dot">·</span>
     <span>KOLEKSION 2025</span><span class="dot">·</span>
     <span>FEMRA &amp; MESHKUJ</span><span class="dot">·</span>
-    <span>⭐ 5.0 STARS</span><span class="dot">·</span>
+    <span>5.0 STARS</span><span class="dot">·</span>
     <span>TRANSPORT +4€</span><span class="dot">·</span>
     <span>FASHION MONTENEGRO</span><span class="dot">·</span>
     <span>BOUTIQUE SHKODËR</span><span class="dot">·</span>
     <span>KOLEKSION 2025</span><span class="dot">·</span>
     <span>FEMRA &amp; MESHKUJ</span><span class="dot">·</span>
-    <span>⭐ 5.0 STARS</span><span class="dot">·</span>
+    <span>5.0 STARS</span><span class="dot">·</span>
     <span>TRANSPORT +4€</span><span class="dot">·</span>
   </div>
 </div>
 
 <!-- SHOP -->
 <section id="shop">
-  <div class="shop-header reveal visible">
+  <div class="shop-header reveal">
     <div class="shop-title-group">
       <p class="shop-eyebrow">Koleksionet 2025</p>
-      <h2 class="shop-main-title">ZGJIDH<br><em>Stilin Tënd</em></h2>
+      <h2 class="shop-main-title">Zgjidh<br><em>Stilin Tënd</em></h2>
     </div>
     <div class="cat-tabs">
-      <button class="cat-tab active" id="tab-femra" onclick="switchTab('femra')">
-        ♀ Femra
-      </button>
-      <button class="cat-tab" id="tab-meshkuj" onclick="switchTab('meshkuj')">
-        ♂ Meshkuj
-      </button>
+      <button class="cat-tab active" id="tab-femra" onclick="switchTab('femra')">♀ Femra</button>
+      <button class="cat-tab" id="tab-meshkuj" onclick="switchTab('meshkuj')">♂ Meshkuj</button>
     </div>
   </div>
 
   <!-- FEMRA -->
   <div class="products-section active" id="section-femra">
     <div class="size-filter">
-      <span class="size-filter-label">Filtroni sipas masës:</span>
+      <span class="size-filter-label">Masë:</span>
       <button class="size-btn active" onclick="filterSize(this,'femra','all')">Të Gjitha</button>
       <button class="size-btn" onclick="filterSize(this,'femra','XS')">XS</button>
       <button class="size-btn" onclick="filterSize(this,'femra','S')">S</button>
@@ -887,141 +850,13 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
       <button class="size-btn" onclick="filterSize(this,'femra','L')">L</button>
       <button class="size-btn" onclick="filterSize(this,'femra','XL')">XL</button>
     </div>
-    <div class="products-grid" id="grid-femra">
-    <div class="product-card reveal visible">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Femra</span>
-        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Fustan Elegante" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Fustan Elegante</div>
-        <div class="product-price-row">
-          <div class="product-price">32<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('f1','XS',this)">XS</button>
-    
-      <button class="ps-btn " onclick="selectSize('f1','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('f1','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('f1','L',this)">L</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('f1','femra')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=f1&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal visible">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Femra</span>
-        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Bluzë Verore" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Bluzë Verore</div>
-        <div class="product-price-row">
-          <div class="product-price">18<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('f2','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('f2','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('f2','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('f2','XL',this)">XL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('f2','femra')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=f2&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal visible">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Femra</span>
-        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Pantallona Slim" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Pantallona Slim</div>
-        <div class="product-price-row">
-          <div class="product-price">28<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('f3','XS',this)">XS</button>
-    
-      <button class="ps-btn " onclick="selectSize('f3','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('f3','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('f3','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('f3','XL',this)">XL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('f3','femra')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=f3&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal visible">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Femra</span>
-        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Xhaketë Klasike" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Xhaketë Klasike</div>
-        <div class="product-price-row">
-          <div class="product-price">45<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('f4','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('f4','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('f4','L',this)">L</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('f4','femra')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=f4&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal visible">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Femra</span>
-        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80" alt="Set Freskues" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Set Freskues</div>
-        <div class="product-price-row">
-          <div class="product-price">38<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('f5','XS',this)">XS</button>
-    
-      <button class="ps-btn " onclick="selectSize('f5','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('f5','M',this)">M</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('f5','femra')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=f5&amp;cat=femra" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div></div>
+    <div class="products-grid" id="grid-femra"></div>
   </div>
 
   <!-- MESHKUJ -->
   <div class="products-section" id="section-meshkuj">
     <div class="size-filter">
-      <span class="size-filter-label">Filtroni sipas masës:</span>
+      <span class="size-filter-label">Masë:</span>
       <button class="size-btn active" onclick="filterSize(this,'meshkuj','all')">Të Gjitha</button>
       <button class="size-btn" onclick="filterSize(this,'meshkuj','S')">S</button>
       <button class="size-btn" onclick="filterSize(this,'meshkuj','M')">M</button>
@@ -1029,137 +864,7 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
       <button class="size-btn" onclick="filterSize(this,'meshkuj','XL')">XL</button>
       <button class="size-btn" onclick="filterSize(this,'meshkuj','XXL')">XXL</button>
     </div>
-    <div class="products-grid" id="grid-meshkuj">
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Meshkuj</span>
-        <img src="images/6.jpg" alt="Këmishë Oxford" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Këmishë Oxford</div>
-        <div class="product-price-row">
-          <div class="product-price">29<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('m1','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('m1','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('m1','XL',this)">XL</button>
-    
-      <button class="ps-btn " onclick="selectSize('m1','XXL',this)">XXL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('m1','meshkuj')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=m1&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Meshkuj</span>
-        <img src="images/7.jpg" alt="Pantallona Chino" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Pantallona Chino</div>
-        <div class="product-price-row">
-          <div class="product-price">34<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('m2','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('m2','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('m2','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('m2','XL',this)">XL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('m2','meshkuj')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=m2&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Meshkuj</span>
-        <img src="images/8.jpg" alt="Xhaketë Casual" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Xhaketë Casual</div>
-        <div class="product-price-row">
-          <div class="product-price">52<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('m3','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('m3','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('m3','XL',this)">XL</button>
-    
-      <button class="ps-btn " onclick="selectSize('m3','XXL',this)">XXL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('m3','meshkuj')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=m3&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Meshkuj</span>
-        <img src="images/9.jpg" alt="Polo Verore" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Polo Verore</div>
-        <div class="product-price-row">
-          <div class="product-price">22<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('m4','S',this)">S</button>
-    
-      <button class="ps-btn " onclick="selectSize('m4','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('m4','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('m4','XL',this)">XL</button>
-    
-      <button class="ps-btn " onclick="selectSize('m4','XXL',this)">XXL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('m4','meshkuj')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=m4&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div>
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <span class="product-cat-badge">Meshkuj</span>
-        <img src="images/10.jpg" alt="Set Sporti" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&amp;auto=format&amp;fit=crop&amp;q=80'" loading="lazy">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Set Sporti</div>
-        <div class="product-price-row">
-          <div class="product-price">41<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">
-      <button class="ps-btn " onclick="selectSize('m5','M',this)">M</button>
-    
-      <button class="ps-btn " onclick="selectSize('m5','L',this)">L</button>
-    
-      <button class="ps-btn " onclick="selectSize('m5','XL',this)">XL</button>
-    </div>
-        <button class="add-to-cart-btn" onclick="addToCart('m5','meshkuj')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
-          Shto në Shportë
-        </button>
-        <a href="product-detail.html?id=m5&amp;cat=meshkuj" class="view-detail-btn">Shiko Detajet →</a>
-      </div>
-    </div></div>
+    <div class="products-grid" id="grid-meshkuj"></div>
   </div>
 </section>
 
@@ -1167,25 +872,27 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
 <section id="features">
   <div class="features-inner">
     <div class="features-top reveal">
-      <p class="features-eyebrow">Pse Fashion Montenegro</p>
-      <h2 class="features-title">ÇFARË NA BËN<br><em>Të Veçantë</em></h2>
+      <div>
+        <p class="features-eyebrow">Pse Fashion Montenegro</p>
+        <h2 class="features-title">Çfarë na bën<br><em>Të Veçantë</em></h2>
+      </div>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-num">01</div>
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
         <h3 class="feature-h">5.0 Stars</h3>
         <p class="feature-p">Vlerësim i përsosur nga klientët tanë. Kënaqësia juaj është prioriteti ynë absolut.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-num">02</div>
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
         <h3 class="feature-h">Dërgesa Shpejt</h3>
         <p class="feature-p">Transport i shpejtë dhe i sigurt në të gjithë Shqipërinë. Vetëm +4€ për çdo porosi.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-num">03</div>
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
         <h3 class="feature-h">Cilësi Premium</h3>
         <p class="feature-p">Produkte cilësore nga koleksionet më të mira. Stile moderne për çdo rast.</p>
       </div>
@@ -1198,26 +905,26 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
   <div class="contact-inner">
     <div class="contact-top reveal">
       <p class="contact-eyebrow">Na Vizito</p>
-      <h2 class="contact-title">GJEJ<br><em>Fashion Montenegro</em></h2>
+      <h2 class="contact-title">Gjej<br><em>Fashion Montenegro</em></h2>
     </div>
     <div class="contact-grid">
       <div class="contact-details reveal">
         <div class="contact-item">
-          <div class="contact-item-dot"></div>
+          <div class="contact-item-line"></div>
           <div>
             <p class="contact-item-label">Adresa</p>
             <p class="contact-item-val">Zogu i I, Shkodër 4001<br>Albania</p>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item-dot"></div>
+          <div class="contact-item-line"></div>
           <div>
             <p class="contact-item-label">Telefon</p>
-            <p class="contact-item-val" style="font-size:22px;letter-spacing:-0.5px;">067 294 4191</p>
+            <p class="contact-item-val" style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:1px;">067 294 4191</p>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item-dot"></div>
+          <div class="contact-item-line"></div>
           <div>
             <p class="contact-item-label">Orari i Punës</p>
             <div class="contact-hours">
@@ -1228,15 +935,14 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
           </div>
         </div>
         <a href="tel:0672944191" class="contact-phone-cta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3 1.26h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3 1.26h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"/></svg>
           Telefono Tani — 067 294 4191
         </a>
       </div>
       <div class="contact-map reveal">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.4!2d19.512!3d42.068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e017c3f44b20d%3A0x71a43496047c87c0!2sZogu+i+I%2C+Shkod%C3%ABr!5e0!3m2!1ssq!2sal!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fashion Montenegro Location">
-        </iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2956.4!2d19.512!3d42.068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e017c3f44b20d%3A0x71a43496047c87c0!2sZogu+i+I%2C+Shkod%C3%ABr!5e0!3m2!1ssq!2sal!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Fashion Montenegro Location"></iframe>
         <div class="contact-map-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
           <div>
             <div class="contact-map-badge-name">Fashion Montenegro</div>
             <div class="contact-map-badge-addr">Zogu i I, Shkodër 4001</div>
@@ -1261,38 +967,38 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
     <p class="footer-copy">© 2025 Fashion Montenegro · Zogu i I, Shkodër · All Rights Reserved</p>
     <div class="footer-rating">
       <span class="footer-stars">★★★★★</span>
-      <span class="footer-rating-txt">5.0 / 5.0 në Google</span>
+      <span class="footer-rating-txt">5.0 / 5.0 Google</span>
     </div>
   </div>
 </footer>
 
-<!-- CART OVERLAY + DRAWER -->
+<!-- CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <span class="cart-title">Shporta</span>
     <button class="cart-close-btn" onclick="closeCart()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
   </div>
   <div class="cart-items" id="cartItems">
     <div class="cart-empty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <p>Shporta juaj është bosh</p>
     </div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
     <div class="cart-shipping-note">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       Transport: +4€ — pagesa me cash pas dorëzimit
     </div>
     <div class="cart-summary">
       <div class="cart-summary-row"><span>Nëntotali</span><span id="subtotalVal">0€</span></div>
       <div class="cart-summary-row"><span>Transport</span><span>+4€</span></div>
-      <div class="cart-summary-row total"><span>TOTAL</span><span id="totalVal">0€</span></div>
+      <div class="cart-summary-row total"><span>Total</span><span id="totalVal">0€</span></div>
     </div>
     <button class="cart-checkout-btn" onclick="openCheckout()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Vazhdo me Porosinë
     </button>
   </div>
@@ -1306,23 +1012,18 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
       <button class="modal-close" onclick="closeCheckout()">✕</button>
     </div>
     <div class="modal-body">
-      <!-- Order summary -->
       <div class="order-summary-box">
         <p class="order-summary-title">Përmbledhja e Porosisë</p>
         <div id="modalOrderItems"></div>
         <hr class="order-divider">
         <div class="order-subtotal"><span>Nëntotali</span><span id="modalSubtotal">0€</span></div>
         <div class="order-shipping"><span>Transport</span><span>+4€</span></div>
-        <div class="order-total"><span>TOTAL</span><span id="modalTotal">0€</span></div>
+        <div class="order-total"><span>Total</span><span id="modalTotal">0€</span></div>
       </div>
-
-      <!-- Payment method -->
       <div class="payment-method-banner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         Pagesa vetëm me <strong style="margin-left:4px;">CASH</strong> — pas dorëzimit
       </div>
-
-      <!-- Form -->
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Emri *</label>
@@ -1351,40 +1052,35 @@ footer { background: var(--ink); padding: 3.5rem 3rem 2.5rem; }
           <input class="form-input" type="email" id="f-email" placeholder="email@juaj.com">
         </div>
       </div>
-
       <button class="place-order-btn" onclick="placeOrder()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         Konfirmo Porosinë
       </button>
     </div>
   </div>
 </div>
 
-<!-- SUCCESS MODAL -->
+<!-- SUCCESS -->
 <div class="success-overlay" id="successOverlay">
   <div class="success-box">
     <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     </div>
-    <h2 class="success-title">Porosia u Pranua! 🎉</h2>
-    <p class="success-msg" id="successMsg">Faleminderit! Do t'ju kontaktojmë së shpejti për të konfirmuar dërgimin. Pagesa bëhet me cash pas marrjes.</p>
+    <h2 class="success-title">Porosia u Pranua</h2>
+    <p class="success-msg" id="successMsg"></p>
     <button class="success-close-btn" onclick="closeSuccess()">Vazhdo Blerjen</button>
   </div>
 </div>
 
 <!-- TOAST -->
 <div class="toast" id="toast">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-  <span id="toastMsg">Produkti u shtua në shportë!</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toastMsg">Produkti u shtua!</span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ─── DATA ───
-// Femra sizes available per product
-const FEMRA_SIZES = ['XS','S','M','L','XL'];
-const MESHKUJ_SIZES = ['S','M','L','XL','XXL'];
-
 const products = {
   femra: [
     { id:'f1', name:'Fustan Elegante', price:32, img:'images/1.jpg', sizes:['XS','S','M','L'] },
@@ -1402,56 +1098,48 @@ const products = {
   ]
 };
 
-// ─── STATE ───
 let cart = [];
-let selectedSizes = {}; // productId -> selectedSize
+let selectedSizes = {};
 
-// ─── RENDER PRODUCTS ───
-function renderProducts(cat, filterSize = 'all') {
+// ─── PRODUCTS ───
+function renderProducts(cat, filterSz = 'all') {
   const grid = document.getElementById('grid-' + cat);
-  const list = products[cat].filter(p =>
-    filterSize === 'all' || p.sizes.includes(filterSize)
-  );
+  const list = products[cat].filter(p => filterSz === 'all' || p.sizes.includes(filterSz));
+  const fallback = 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&auto=format&fit=crop&q=80';
 
   grid.innerHTML = list.map(p => {
-    const sizeHtml = p.sizes.map(s => `
+    const sizes = p.sizes.map(s => `
       <button class="ps-btn ${selectedSizes[p.id]===s?'selected':''}"
         onclick="selectSize('${p.id}','${s}',this)">${s}</button>
     `).join('');
-
+    const badge = cat === 'femra' ? 'Femra' : 'Meshkuj';
     return `
     <div class="product-card reveal">
       <div class="product-img-wrap">
-        <span class="product-cat-badge">${cat === 'femra' ? 'Femra' : 'Meshkuj'}</span>
-        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&auto=format&fit=crop&q=80'" loading="lazy">
+        <span class="product-cat-badge">${badge}</span>
+        <img src="${p.img}" alt="${p.name}" onerror="this.src='${fallback}'" loading="lazy">
       </div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
-        <div class="product-price-row">
-          <div class="product-price">${p.price}<span>€</span></div>
-        </div>
-        <div class="product-sizes-row">${sizeHtml}</div>
+        <div class="product-price">${p.price}<span> €</span></div>
+        <div class="product-sizes-row">${sizes}</div>
         <button class="add-to-cart-btn" onclick="addToCart('${p.id}','${cat}')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Shto në Shportë
         </button>
         <a href="product-detail.html?id=${p.id}&cat=${cat}" class="view-detail-btn">Shiko Detajet →</a>
       </div>
     </div>`;
   }).join('');
-
-  // Re-observe new cards
   grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 }
 
-function selectSize(productId, size, btn) {
-  selectedSizes[productId] = size;
-  // Update UI — remove selected from siblings
+function selectSize(pid, size, btn) {
+  selectedSizes[pid] = size;
   btn.closest('.product-sizes-row').querySelectorAll('.ps-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
 
-// ─── TABS ───
 function switchTab(cat) {
   document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.products-section').forEach(s => s.classList.remove('active'));
@@ -1459,7 +1147,6 @@ function switchTab(cat) {
   document.getElementById('section-' + cat).classList.add('active');
 }
 
-// ─── SIZE FILTER ───
 function filterSize(btn, cat, size) {
   btn.closest('.size-filter').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -1467,48 +1154,30 @@ function filterSize(btn, cat, size) {
 }
 
 // ─── CART ───
-function addToCart(productId, cat) {
-  const product = products[cat].find(p => p.id === productId);
-  const size = selectedSizes[productId];
-
-  if (!size) {
-    showToast('⚠ Zgjidhni madhësinë fillimisht!', true);
-    return;
-  }
-
-  // Check if same product+size already in cart
-  const existing = cart.find(i => i.id === productId && i.size === size);
-  if (existing) {
-    showToast('Produkti është tashmë në shportë!', false);
-    return;
-  }
-
-  cart.push({ ...product, size, cat });
+function addToCart(pid, cat) {
+  const p = products[cat].find(x => x.id === pid);
+  const size = selectedSizes[pid];
+  if (!size) { showToast('Zgjidhni madhësinë fillimisht'); return; }
+  if (cart.find(i => i.id === pid && i.size === size)) { showToast('Tashmë në shportë'); return; }
+  cart.push({ ...p, size, cat });
   updateCartUI();
-  showToast(`${product.name} (${size}) u shtua! ✓`);
+  showToast(`${p.name} (${size}) u shtua`);
 }
 
-function removeFromCart(idx) {
-  cart.splice(idx, 1);
-  updateCartUI();
-}
+function removeFromCart(idx) { cart.splice(idx, 1); updateCartUI(); }
 
 function updateCartUI() {
   const count = cart.length;
-  const countEl = document.getElementById('cartCount');
-  countEl.textContent = count;
-  countEl.classList.toggle('has-items', count > 0);
-
-  const subtotal = cart.reduce((sum, i) => sum + i.price, 0);
-  const total = subtotal + 4;
-
-  document.getElementById('subtotalVal').textContent = subtotal + '€';
-  document.getElementById('totalVal').textContent = total + '€';
-
+  const el = document.getElementById('cartCount');
+  el.textContent = count;
+  el.classList.toggle('has-items', count > 0);
+  const sub = cart.reduce((s, i) => s + i.price, 0);
+  document.getElementById('subtotalVal').textContent = sub + '€';
+  document.getElementById('totalVal').textContent = (sub + 4) + '€';
+  const fb = 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&auto=format&fit=crop&q=80';
   const itemsEl = document.getElementById('cartItems');
   const footerEl = document.getElementById('cartFooter');
-
-  if (count === 0) {
+  if (!count) {
     itemsEl.innerHTML = `<div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <p>Shporta juaj është bosh</p></div>`;
@@ -1516,17 +1185,14 @@ function updateCartUI() {
   } else {
     itemsEl.innerHTML = cart.map((item, idx) => `
       <div class="cart-item">
-        <img class="cart-item-img" src="${item.img}"
-          onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=200&auto=format&fit=crop&q=80'"
-          alt="${item.name}">
+        <img class="cart-item-img" src="${item.img}" onerror="this.src='${fb}'" alt="${item.name}">
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-size">Masa: ${item.size} · ${item.cat === 'femra' ? 'Femra' : 'Meshkuj'}</div>
+          <div class="cart-item-size">Masa: ${item.size} · ${item.cat==='femra'?'Femra':'Meshkuj'}</div>
           <div class="cart-item-price">${item.price}€</div>
         </div>
         <button class="cart-item-remove" onclick="removeFromCart(${idx})">×</button>
-      </div>
-    `).join('');
+      </div>`).join('');
     footerEl.style.display = 'block';
   }
 }
@@ -1540,55 +1206,34 @@ function closeCart() {
   document.getElementById('cartOverlay').classList.remove('open');
 }
 
-// ─── CHECKOUT ───
 function openCheckout() {
   closeCart();
-  // Populate modal order summary
-  const subtotal = cart.reduce((sum, i) => sum + i.price, 0);
-  const total = subtotal + 4;
-  document.getElementById('modalSubtotal').textContent = subtotal + '€';
-  document.getElementById('modalTotal').textContent = total + '€';
-  document.getElementById('modalOrderItems').innerHTML = cart.map(i => `
-    <div class="order-item-row"><span>${i.name}</span><span>${i.price}€</span></div>
-    <div class="order-item-row size-row"><span>Masa: ${i.size}</span></div>
-  `).join('');
+  const sub = cart.reduce((s, i) => s + i.price, 0);
+  document.getElementById('modalSubtotal').textContent = sub + '€';
+  document.getElementById('modalTotal').textContent = (sub + 4) + '€';
+  document.getElementById('modalOrderItems').innerHTML = cart.map(i =>
+    `<div class="order-item-row"><span>${i.name}</span><span>${i.price}€</span></div>
+     <div class="order-item-row size-row"><span>Masa: ${i.size}</span></div>`).join('');
   document.getElementById('checkoutModal').classList.add('open');
 }
-function closeCheckout() {
-  document.getElementById('checkoutModal').classList.remove('open');
-}
+function closeCheckout() { document.getElementById('checkoutModal').classList.remove('open'); }
 
 function placeOrder() {
   const name = document.getElementById('f-name').value.trim();
   const surname = document.getElementById('f-surname').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const address = document.getElementById('f-address').value.trim();
-
-  if (!name || !surname || !phone || !address) {
-    showToast('⚠ Plotësoni të gjitha fushat e detyrueshme!', false);
-    return;
-  }
-
+  if (!name || !surname || !phone || !address) { showToast('Plotësoni të gjitha fushat'); return; }
   const total = cart.reduce((s, i) => s + i.price, 0) + 4;
   document.getElementById('successMsg').textContent =
     `Faleminderit ${name}! Porosia juaj (${total}€) u pranua. Do t'ju kontaktojmë në ${phone} për të konfirmuar dërgimin. Pagesa bëhet me cash pas marrjes.`;
-
   closeCheckout();
-  cart = [];
-  updateCartUI();
-  // Clear form
-  ['f-name','f-surname','f-phone','f-address','f-email'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-
+  cart = []; updateCartUI();
+  ['f-name','f-surname','f-phone','f-address','f-email'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('successOverlay').classList.add('open');
 }
+function closeSuccess() { document.getElementById('successOverlay').classList.remove('open'); }
 
-function closeSuccess() {
-  document.getElementById('successOverlay').classList.remove('open');
-}
-
-// ─── TOAST ───
 function showToast(msg) {
   const t = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
@@ -1596,53 +1241,55 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ─── THREE.JS HERO ───
+// ─── THREE.JS HERO (monochrome) ───
 (function() {
   const canvas = document.getElementById('oe-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   const W = canvas.parentElement.offsetWidth;
   const H = canvas.parentElement.offsetHeight;
+  canvas.width = W; canvas.height = H;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(W, H);
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(70, W/H, 0.1, 500);
   cam.position.z = 20;
   const lines = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 14; i++) {
     const pts = [];
-    const y = (i - 6) * 2.8;
-    for (let x = -20; x <= 20; x += 0.5) {
-      pts.push(new THREE.Vector3(x, y + Math.sin(x * 0.3 + i) * 0.6, 0));
+    const y = (i - 7) * 2.5;
+    for (let x = -22; x <= 22; x += 0.5) {
+      pts.push(new THREE.Vector3(x, y + Math.sin(x * 0.25 + i) * 0.5, 0));
     }
     const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const grey = Math.floor(80 + Math.random() * 120);
+    const col = (grey << 16) | (grey << 8) | grey;
     const mat = new THREE.LineBasicMaterial({
-      color: i % 3 === 0 ? 0x00B4CC : (i % 3 === 1 ? 0x006880 : 0x003344),
-      transparent: true, opacity: 0.15 + Math.random() * 0.25,
+      color: col, transparent: true,
+      opacity: 0.06 + Math.random() * 0.12,
     });
     const line = new THREE.Line(geo, mat);
     scene.add(line);
-    lines.push({ line, speed: 0.003 + Math.random() * 0.004, offset: i * 0.5 });
+    lines.push({ line, speed: 0.002 + Math.random() * 0.003, offset: i * 0.6 });
   }
-  const pCount = 600;
+  const pCount = 400;
   const pos = new Float32Array(pCount * 3);
   for (let i = 0; i < pCount; i++) {
-    pos[i*3] = (Math.random()-0.5)*50;
-    pos[i*3+1] = (Math.random()-0.5)*35;
-    pos[i*3+2] = (Math.random()-0.5)*20;
+    pos[i*3] = (Math.random()-.5)*50;
+    pos[i*3+1] = (Math.random()-.5)*35;
+    pos[i*3+2] = (Math.random()-.5)*15;
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x00B4CC, size: 0.12, transparent: true, opacity: 0.5 })));
+  scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x888888, size: 0.1, transparent: true, opacity: 0.3 })));
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.01;
+    t += 0.008;
     lines.forEach(({ line, speed, offset }) => {
-      line.rotation.z = Math.sin(t * speed * 20 + offset) * 0.04;
       const p = line.geometry.attributes.position;
       for (let i = 0; i < p.count; i++) {
-        p.setY(i, p.getY(i) + Math.sin(p.getX(i) * 0.4 + t + offset) * 0.002);
+        p.setY(i, p.getY(i) + Math.sin(p.getX(i) * 0.3 + t + offset) * 0.001);
       }
       p.needsUpdate = true;
     });
@@ -1659,16 +1306,13 @@ function showToast(msg) {
 
 // ─── NAV SCROLL ───
 window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
 });
 
 // ─── HAMBURGER ───
 const hbg = document.getElementById('hamburger');
 const mob = document.getElementById('mobileMenu');
-hbg.addEventListener('click', () => {
-  hbg.classList.toggle('open');
-  mob.classList.toggle('open');
-});
+hbg.addEventListener('click', () => { hbg.classList.toggle('open'); mob.classList.toggle('open'); });
 document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => {
   hbg.classList.remove('open'); mob.classList.remove('open');
 }));
@@ -1679,7 +1323,7 @@ const ring = document.getElementById('cursor-ring');
 let mx=0, my=0, rx=0, ry=0;
 document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
 (function moveCursor() {
-  rx += (mx-rx)*0.14; ry += (my-ry)*0.14;
+  rx += (mx-rx)*.14; ry += (my-ry)*.14;
   if(cur){ cur.style.left=mx+'px'; cur.style.top=my+'px'; }
   if(ring){ ring.style.left=rx+'px'; ring.style.top=ry+'px'; }
   requestAnimationFrame(moveCursor);
@@ -1688,13 +1332,12 @@ document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
 // ─── REVEAL ───
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
 
 // ─── INIT ───
 renderProducts('femra');
 renderProducts('meshkuj');
 </script>
-
-
-</body></html>
+</body>
+</html>
